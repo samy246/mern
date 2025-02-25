@@ -22,5 +22,6 @@ export const store=configureStore({
         ReviewSlice,
         OrderSlice,
         WishlistSlice
-    }
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 })

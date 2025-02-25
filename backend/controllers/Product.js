@@ -50,7 +50,7 @@ exports.getAll = async (req, res) => {
         res.set("X-Total-Count",totalDocs)
 
         res.status(200).json(results)
-    
+
     } catch (error) {
         console.log(error);
         res.status(500).json({message:'Error fetching products, please try again later'})
@@ -58,6 +58,8 @@ exports.getAll = async (req, res) => {
 };
 
 exports.getById=async(req,res)=>{
+    console.log("product");
+
     try {
         const {id}=req.params
         const result=await Product.findById(id).populate("brand").populate("category")

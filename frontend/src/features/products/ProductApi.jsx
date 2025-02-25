@@ -34,11 +34,23 @@ export const fetchProducts=async(filters)=>{
     if(filters.user){
         queryString+=`user=${filters.user}&`
     }
-    
+
     try {
         const res=await axiosi.get(`/products?${queryString}`)
         const totalResults=await res.headers.get("X-Total-Count")
         return {data:res.data,totalResults:totalResults}
+    } catch (error) {
+        throw error.response.data
+    }
+}
+// fetch daily product
+export const fetchdailyProducts=async()=>{
+
+
+    try {
+        const res=await axiosi.get(`/dailyproducts`)
+        const dailytotalResults=await res.headers.get("X-Total-Count")
+        return {data:res.data,totaldailyResults:dailytotalResults}
     } catch (error) {
         throw error.response.data
     }
@@ -51,11 +63,29 @@ export const fetchProductById=async(id)=>{
         throw error.response.data
     }
 }
+export const fetchdailyProductById=async(id)=>{
+    try {
+        const res=await axiosi.get(`/dailyproducts/${id}`)
+        return res.data
+    } catch (error) {
+        throw error.response.data
+    }
+}
 export const updateProductById=async(update)=>{
     try {
         const res=await axiosi.patch(`/products/${update._id}`,update)
         return res.data
     } catch (error) {
+        throw error.response.data
+    }
+}
+export const updatedailyProductById=async(update)=>{
+    try {
+        const res=await axiosi.patch(`/dailyproducts/${update._id}`,update)
+        return res.data
+    } catch (error) {
+        console.log("error.response.data",error.response.data);
+
         throw error.response.data
     }
 }
