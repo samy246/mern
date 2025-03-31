@@ -1,24 +1,125 @@
-import { Box, IconButton, TextField, Typography, useMediaQuery, useTheme } from '@mui/material'
+import { Box, IconButton, TextField, Typography,Dialog,
+    DialogTitle,
+    DialogContent , useMediaQuery, useTheme } from '@mui/material'
 import { Stack } from '@mui/material'
-import React from 'react'
+import React,{useState} from 'react'
 import { QRCodePng, appStorePng, googlePlayPng ,facebookPng,instagramPng,twitterPng,linkedinPng} from '../../assets'
 import SendIcon from '@mui/icons-material/Send';
-import { MotionConfig, motion } from 'framer-motion';
+import { MotionConfig, motion,AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import footerbg from "../../assets/images/footer-bg.webp"
+import footerbg from "../../assets/images/footer-bg.webp";
+import LocalShippingIcon from '@mui/icons-material/LocalShipping'
+import CloseIcon from '@mui/icons-material/Close'
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn'
+import { useSelector } from 'react-redux';
+import { selectLoggedInUser } from '../auth/AuthSlice';
 export const Footer = () => {
 
     const theme=useTheme()
     const is700=useMediaQuery(theme.breakpoints.down(700))
-
+    const [isParcelModalOpen, setIsParcelModalOpen] = useState(false)
     const labelStyles={
         fontWeight:300,
         cursor:'pointer'
     }
+const loggedInUser=useSelector(selectLoggedInUser)
+    const handleParcelServicesClick = () => {
+        setIsParcelModalOpen(true)
+    }
 
+    const handleCloseParcelModal = () => {
+        setIsParcelModalOpen(false)
+    }
+     // Parcel Service Item Component with Animation
+     const ParcelServiceItem = ({ name }) => (
+        <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                padding: '12px',
+                background: 'rgba(255,255,255,0.1)',
+                borderRadius: '12px',
+                margin: '8px 0'
+            }}
+        >
+            <LocalShippingIcon sx={{ color: theme.palette.primary.main, fontSize: 40 }} />
+            <Typography variant="h6" sx={{ color: 'primary.main' }}>
+                {name}
+            </Typography>
+        </motion.div>
+    )
+
+      // Pricing Information Component
+      const PricingInfo = () => (
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+        >
+            <Stack
+                spacing={2}
+                sx={{
+                    background: 'rgba(0,0,0,0.05)',
+                    borderRadius: '12px',
+                    padding: '16px',
+                    marginTop: '16px'
+                }}
+            >
+                <Typography
+                    variant="h6"
+                    align="center"
+                    sx={{
+                        color: theme.palette.primary.main,
+                        fontWeight: 'bold'
+                    }}
+                >
+                    Professional Courier Door Delivery
+                </Typography>
+
+                <Stack
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    sx={{
+                        background: 'rgba(255,255,255,0.7)',
+                        borderRadius: '8px',
+                        padding: '12px'
+                    }}
+                >
+                    <Typography>0-1 kg per</Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                        {/* <MonetizationOnIcon sx={{ color: 'green', fontSize: 20 }} /> */}
+                        <Typography sx={{ fontWeight: 'bold', color: 'green' }}>Rs.30.00</Typography>
+                    </Box>
+                </Stack>
+
+                <Stack
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    sx={{
+                        background: 'rgba(255,255,255,0.7)',
+                        borderRadius: '8px',
+                        padding: '12px'
+                    }}
+                >
+                    <Typography>More than 1 kg per</Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                        {/* <MonetizationOnIcon sx={{ color: 'green', fontSize: 20 }} /> */}
+                        <Typography sx={{ fontWeight: 'bold', color: 'green' }}>Rs.25.00</Typography>
+                    </Box>
+                </Stack>
+            </Stack>
+        </motion.div>
+    )
   return (
+    <>
     <Stack sx={{backgroundImage: `url(${footerbg})`,backgroundColor:theme.palette.primary.main,paddingTop:"3rem",paddingLeft:is700?"1rem":"3rem",paddingRight:is700?"1rem":"3rem",paddingBottom:"1.5rem",rowGap:"5rem",color:theme.palette.primary.light,justifyContent:"space-around"}}>
 
             {/* upper */}
@@ -43,16 +144,36 @@ export const Footer = () => {
 
                 <Stack rowGap={'1rem'} padding={'1rem'}>
                     <Typography  variant='h6'>Account</Typography>
+                    {loggedInUser?.email ? (
+  <>
+    <Link to={"/profile"} style={{ textDecoration: "none", color: "#ffffff" }}>
+      <Typography sx={labelStyles}>My Account</Typography>
+    </Link>
+    <Link to={"/cart"} style={{ textDecoration: "none", color: "#ffffff" }}>
+      <Typography sx={labelStyles}>Cart</Typography>
+    </Link>
+  </>
+) : (
+  <Link to={"/login"} style={{ textDecoration: "none", color: "#ffffff" }}>
+    <Typography sx={labelStyles}>Login / Register</Typography>
+  </Link>
+)}
+
+                    {/* {
+                        loggedInUser
+                    }
+                    <Link to={"/login"} style={{textDecoration:"none",color:"#ffffff"}}>
                     <Typography sx={labelStyles}>My Account</Typography>
+                    </Link>
                     <Link to={"/login"} style={{textDecoration:"none",color:"#ffffff"}}>
                     <Typography sx={labelStyles}>Login / Register</Typography>
                     </Link>
                     <Link to={"/cart"} style={{textDecoration:"none",color:"#ffffff"}}>
                     <Typography sx={labelStyles}>Cart</Typography>
-                    </Link>
-                    <Link to={"/wishlist"} style={{textDecoration:"none",color:"#ffffff"}}>
+                    </Link> */}
+                    {/* <Link to={"/wishlist"} style={{textDecoration:"none",color:"#ffffff"}}>
                     <Typography sx={labelStyles}>Wishlist</Typography>
-                    </Link>
+                    </Link> */}
                     {/* <Typography sx={labelStyles}>Shop</Typography> */}
                 </Stack>
 
@@ -61,39 +182,14 @@ export const Footer = () => {
                     <Link to={"/aboutus"} style={{textDecoration:"none",color:"#ffffff"}}>
                     <Typography sx={labelStyles}>About-Us</Typography>
                     </Link>
+                    <Link to={"/contactus"} style={{textDecoration:"none",color:"#ffffff"}}>
                     <Typography sx={labelStyles}>Contact</Typography>
-                    {/* <Typography sx={labelStyles}>FAQ</Typography>
-                    <Typography sx={labelStyles}>Contact</Typography> */}
+                    </Link>
+                    <Typography sx={labelStyles}
+                            onClick={handleParcelServicesClick}>Parcel Services</Typography>
+                    {/* <Typography sx={labelStyles}>Contact</Typography> */}
                 </Stack>
 
-                {/* <Stack rowGap={'1rem'} padding={'1rem'}>
-                    <Typography  variant='h6'>Download App</Typography>
-                    <Typography sx={{...labelStyles,color:"graytext",fontWeight:500}}>Save $3 with App New User Only</Typography>
-                    <Stack flexDirection={'row'} columnGap={'.5rem'}>
-
-                        <Box width={'100px'} height={"100px"}>
-                            <img src={QRCodePng} height={'100%'} width={'100%'} style={{objectFit:'contain'}} alt="QR Code"/>
-                        </Box>
-
-                        <Stack justifyContent={'space-around'}>
-                            <Stack>
-                                <img style={{width:"100%",height:"100%",cursor:"pointer"}} src={googlePlayPng} alt="GooglePlay" />
-                            </Stack>
-                            <Stack>
-                                <img style={{width:"100%",height:'100%',cursor:"pointer"}} src={appStorePng} alt="AppStore" />
-                            </Stack>
-                        </Stack>
-                    </Stack>
-
-                    <Stack mt={.6} flexDirection={'row'} columnGap={'2rem'}>
-                        <MotionConfig whileHover={{scale:1.1}} whileTap={{scale:1}}>
-                            <motion.img style={{cursor:"pointer"}} src={facebookPng} alt="Facebook" />
-                            <motion.img style={{cursor:"pointer"}} src={twitterPng} alt="Twitter" />
-                            <motion.img style={{cursor:"pointer"}} src={instagramPng} alt="Instagram" />
-                            <motion.img style={{cursor:"pointer"}} src={linkedinPng} alt="Linkedin" />
-                        </MotionConfig>
-                    </Stack>
-                </Stack> */}
 
             </Stack>
 
@@ -135,5 +231,105 @@ export const Footer = () => {
             </Stack>
 
     </Stack>
+        {/* Parcel Services Modal */}
+        <Dialog
+                open={isParcelModalOpen}
+                onClose={handleCloseParcelModal}
+                maxWidth="sm"
+                fullWidth
+                PaperProps={{
+                    style: {
+                        borderRadius: '20px',
+                        background: 'linear-gradient(145deg, #f0f0f0, #e6e6e6)',
+                        overflow: 'hidden',
+                        position: 'relative'
+                    }
+                }}
+            >
+                <AnimatePresence>
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        {/* Close Button with Animated Hover Effect */}
+                        <motion.div
+                            style={{
+                                position: 'absolute',
+                                top: '10px',
+                                right: '10px',
+                                zIndex: 10
+                            }}
+                            whileHover={{ rotate: 90, scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                        >
+                            <IconButton onClick={handleCloseParcelModal}>
+                                <CloseIcon sx={{ color: theme.palette.primary.main }} />
+                            </IconButton>
+                        </motion.div>
+
+                        <DialogContent>
+                            <motion.div
+                                initial={{ y: 50, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ delay: 0.2, duration: 0.5 }}
+                            >
+                                <Typography
+                                    variant="h4"
+                                    align="center"
+                                    gutterBottom
+                                    sx={{
+                                        fontWeight: 'bold',
+                                        color: theme.palette.primary.main,
+                                        marginBottom: '24px'
+                                    }}
+                                >
+                                    Parcel Services
+                                </Typography>
+
+                                <Stack spacing={2}>
+                                    <ParcelServiceItem
+                                        name="Rathimeena Parcel Service"
+                                    />
+                                    <ParcelServiceItem
+                                        name="MSS Parcel Service"
+                                    />
+                                    <ParcelServiceItem
+                                        name="A1 Parcel Service"
+                                    />
+                                </Stack>
+
+
+
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.6, duration: 0.5 }}
+                                >
+                                    <Typography
+                                        variant="body1"
+                                        align="center"
+                                        sx={{
+                                            fontWeight: 'bold',
+                                            color: 'red',
+                                            marginTop: '24px',
+                                            padding: '12px',
+                                            background: 'rgba(255,0,0,0.1)',
+                                            borderRadius: '12px'
+                                        }}
+                                    >
+                                        Important: Loading & Packing Charges Mandatory – Rs.70.00
+                                    </Typography>
+                                </motion.div>
+                                   {/* Pricing Information */}
+                                   <PricingInfo />
+                            </motion.div>
+                        </DialogContent>
+                    </motion.div>
+                </AnimatePresence>
+            </Dialog>
+
+    </>
   )
 }

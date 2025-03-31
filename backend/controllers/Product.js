@@ -11,51 +11,125 @@ exports.create=async(req,res)=>{
         return res.status(500).json({message:'Error adding product, please trying again later'})
     }
 }
-
+// new
 exports.getAll = async (req, res) => {
     try {
-        const filter={}
-        const sort={}
-        let skip=0
-        let limit=0
+        const filter = {}
+        const sort = {}
+        let skip = 0
+        let limit = 0
 
-        if(req.query.brand){
-            filter.brand={$in:req.query.brand}
+        // Search functionality
+        if (req.query.search) {
+            filter.$or = [
+                { name: { $regex: req.query.search, $options: 'i' } },
+                { description: { $regex: req.query.search, $options: 'i' } },
+                { 'brand.name': { $regex: req.query.search, $options: 'i' } },
+                { 'category.name': { $regex: req.query.search, $options: 'i' } }
+            ]
         }
 
-        if(req.query.category){
-            filter.category={$in:req.query.category}
+        // Brand filter
+        if (req.query.brand) {
+            filter.brand = { $in: req.query.brand }
         }
 
-        if(req.query.user){
-            filter['isDeleted']=false
+        // Category filter
+        if (req.query.category) {
+            filter.category = { $in: req.query.category }
         }
 
-        if(req.query.sort){
-            sort[req.query.sort]=req.query.order?req.query.order==='asc'?1:-1:1
+        // User-specific filter
+        if (req.query.user) {
+            filter['isDeleted'] = false
         }
 
-        if(req.query.page && req.query.limit){
-
-            const pageSize=req.query.limit
-            const page=req.query.page
-
-            skip=pageSize*(page-1)
-            limit=pageSize
+        // Sorting
+        if (req.query.sort) {
+            sort[req.query.sort] = req.query.order
+                ? (req.query.order === 'asc' ? 1 : -1)
+                : 1
         }
 
-        const totalDocs=await Product.find(filter).sort(sort).populate("brand").countDocuments().exec()
-        const results=await Product.find(filter).sort(sort).populate("brand").skip(skip).limit(limit).exec()
+        // Pagination
+        if (req.query.page && req.query.limit) {
+            const pageSize = parseInt(req.query.limit)
+            const page = parseInt(req.query.page)
 
-        res.set("X-Total-Count",totalDocs)
+            skip = pageSize * (page - 1)
+            limit = pageSize
+        }
+
+        // Count total documents matching the filter
+        const totalDocs = await Product.find(filter)
+            .populate("brand")
+            .populate("category")
+            .countDocuments()
+            .exec()
+
+        // Fetch results with pagination and population
+        const results = await Product.find(filter)
+            .populate("brand")
+            .populate("category")
+            .sort(sort)
+            .skip(skip)
+            .limit(limit)
+            .exec()
+
+        // Set total count header
+        res.set("X-Total-Count", totalDocs)
 
         res.status(200).json(results)
 
     } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({message:'Error fetching products, please try again later'})
     }
 };
+// exports.getAll = async (req, res) => {
+//     try {
+//         const filter={}
+//         const sort={}
+//         let skip=0
+//         let limit=0
+
+//         if(req.query.brand){
+//             filter.brand={$in:req.query.brand}
+//         }
+
+//         if(req.query.category){
+//             filter.category={$in:req.query.category}
+//         }
+
+//         if(req.query.user){
+//             filter['isDeleted']=false
+//         }
+
+//         if(req.query.sort){
+//             sort[req.query.sort]=req.query.order?req.query.order==='asc'?1:-1:1
+//         }
+
+//         if(req.query.page && req.query.limit){
+
+//             const pageSize=req.query.limit
+//             const page=req.query.page
+
+//             skip=pageSize*(page-1)
+//             limit=pageSize
+//         }
+
+//         const totalDocs=await Product.find(filter).sort(sort).populate("brand").populate("category").countDocuments().exec()
+//         const results=await Product.find(filter).sort(sort).populate("brand").populate("category").skip(skip).limit(limit).exec()
+
+//         res.set("X-Total-Count",totalDocs)
+
+//         res.status(200).json(results)
+
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).json({message:'Error fetching products, please try again later'})
+//     }
+// };
 
 exports.getById=async(req,res)=>{
     console.log("product");

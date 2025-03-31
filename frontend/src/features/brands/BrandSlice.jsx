@@ -8,6 +8,8 @@ const initialState={
 }
 
 export const fetchAllBrandsAsync=createAsyncThunk('brands/fetchAllBrandsAsync',async()=>{
+    console.log("brand slice11");
+
     const brands=await fetchAllBrands()
     return brands
 })

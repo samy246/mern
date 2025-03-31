@@ -1,0 +1,88 @@
+.homeTesti{
+    padding: 87px 0 85px;
+    max-width: 779px;
+    margin: auto;
+  }
+  .homeTesti .container{
+    display: flex;
+    flex-direction: column;
+  }
+  .homeTesti .titleH2{
+    text-align: center;
+    margin-bottom: 45px;
+  }
+  .homeTesti img{
+    width: 47px;
+    margin: auto;
+  }
+  .homeTesti .eachTesti p{
+    margin: 22px 0;
+    color: #333;
+    text-align: center;
+    font-family: "Poppins";
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 26px;
+  }
+  .homeTesti .eachTesti h3{
+    color: #2F3792;
+    text-align: center;
+    font-family: "Poppins";
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 33px;
+    text-transform: uppercase;
+    margin: 0px;
+  }
+  .homeTesti img.slick-arrow{
+    width: 31.6px;
+    height: 31.6px;
+    top: auto;
+    bottom: -64px;
+    margin: 0px;
+    left: 45%;
+  }
+  .homeTesti img.slick-next{
+    right: 45%;
+    left: auto;
+  }
+  @media screen and (max-width: 991px){
+    .homeTesti {
+      padding: 60px 0;
+    }
+    .homeTesti .titleH2{
+      margin-bottom: 20px;
+    }
+  }
+  @media screen and (max-width: 767px ){
+    .homeTesti img.slick-arrow{
+        left: 43%;
+    }
+    .homeTesti img.slick-next{
+        right: 43%;
+        left: auto;
+    }
+  }
+  @media screen and (max-width: 555px ){
+    .homeTesti img.slick-arrow{
+        left: 40%;
+    }
+    .homeTesti img.slick-next{
+        right: 40%;
+        left: auto;
+    }
+    .homeTesti .titleH2 {
+        margin-bottom: 20px;
+    }
+  }
+  @media screen and (max-width: 400px ){
+    .homeTesti img.slick-arrow{
+        left: 36%;
+        left: 40%;
+    }
+    .homeTesti img.slick-next{
+        right: 36%;
+        left: auto;
+    }
+  }

@@ -8,41 +8,92 @@ export const addProduct=async(data)=>{
         throw error.response.data
     }
 }
-export const fetchProducts=async(filters)=>{
+//new
+export const fetchProducts = async (filters) => {
+    console.log("filters", filters);
 
-    let queryString=''
+    let queryString = ''
 
-    if(filters.brand){
-        filters.brand.map((brand)=>{
-            queryString+=`brand=${brand}&`
+    // Brand filter
+    if (filters.brand) {
+        filters.brand.map((brand) => {
+            queryString += `brand=${brand}&`
         })
     }
-    if(filters.category){
-        filters.category.map((category)=>{
-            queryString+=`category=${category}&`
+
+    // Category filter
+    if (filters.category) {
+        filters.category.map((category) => {
+            queryString += `category=${category}&`
         })
     }
 
-    if(filters.pagination){
-        queryString+=`page=${filters.pagination.page}&limit=${filters.pagination.limit}&`
+    // Pagination
+    if (filters.pagination) {
+        queryString += `page=${filters.pagination.page}&limit=${filters.pagination.limit}&`
     }
 
-    if(filters.sort){
-        queryString+=`sort=${filters.sort.sort}&order=${filters.sort.order}&`
+    // Sorting
+    if (filters.sort) {
+        queryString += `sort=${filters.sort.sort}&order=${filters.sort.order}&`
     }
 
-    if(filters.user){
-        queryString+=`user=${filters.user}&`
+    // User filter
+    if (filters.user) {
+        queryString += `user=${filters.user}&`
+    }
+
+    // Search functionality
+    if (filters.search) {
+        queryString += `search=${encodeURIComponent(filters.search)}&`
     }
 
     try {
-        const res=await axiosi.get(`/products?${queryString}`)
-        const totalResults=await res.headers.get("X-Total-Count")
-        return {data:res.data,totalResults:totalResults}
+        const res = await axiosi.get(`/products?${queryString.slice(0, -1)}`)
+        const totalResults = res.headers.get("X-Total-Count")
+        return { data: res.data, totalResults: Number(totalResults) }
     } catch (error) {
-        throw error.response.data
+        throw error.response?.data || error
     }
 }
+// new
+
+// export const fetchProducts=async(filters)=>{
+// console.log("filters",filters);
+
+//     let queryString=''
+
+//     if(filters.brand){
+//         filters.brand.map((brand)=>{
+//             queryString+=`brand=${brand}&`
+//         })
+//     }
+//     if(filters.category){
+//         filters.category.map((category)=>{
+//             queryString+=`category=${category}&`
+//         })
+//     }
+
+//     if(filters.pagination){
+//         queryString+=`page=${filters.pagination.page}&limit=${filters.pagination.limit}&`
+//     }
+
+//     if(filters.sort){
+//         queryString+=`sort=${filters.sort.sort}&order=${filters.sort.order}&`
+//     }
+
+//     if(filters.user){
+//         queryString+=`user=${filters.user}&`
+//     }
+
+//     try {
+//         const res=await axiosi.get(`/products?${queryString}`)
+//         const totalResults=await res.headers.get("X-Total-Count")
+//         return {data:res.data,totalResults:totalResults}
+//     } catch (error) {
+//         throw error.response.data
+//     }
+// }
 // fetch daily product
 export const fetchdailyProducts=async()=>{
 

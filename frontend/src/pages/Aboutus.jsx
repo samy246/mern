@@ -8,8 +8,7 @@ export default function Aboutus() {
   return (
 <>
     <Navbar/>
-    {/* <h1>Cart page</h1> */}
-    {/* <Cart/> */}
+
 <About/>
     <Footer/>
     </>
