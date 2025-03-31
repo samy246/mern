@@ -14,64 +14,77 @@ import { NotFoundPage } from './pages/NotFoundPage';
 import { AddCategoryPage } from './pages/AddCategoryPage';
 import { DailyProductUpdate } from './features/admin/DailyProductUpdate';
 import Aboutus from './pages/Aboutus';
+import ScrollToTop from './pages/ScrollToTop';
+import WhatsAppChat from './pages/WhatsAppChat';
+import Products from './pages/Products';
+import Contactus from './pages/Contactus';
+import { useEffect } from 'react';
 
 
 function App() {
 
   const isAuthChecked=useSelector(selectIsAuthChecked)
   const loggedInUser=useSelector(selectLoggedInUser)
-
+  useEffect(() => {
+    const observerErr = (e) => {
+      if (e.message.includes("ResizeObserver")) {
+        e.stopImmediatePropagation();
+      }
+    };
+    window.addEventListener("error", observerErr);
+    return () => window.removeEventListener("error", observerErr);
+  }, []);
 
   useAuthCheck();
   useFetchLoggedInUserDetails(loggedInUser);
+console.log("loggedInUser",loggedInUser);
 
 
   const routes = createBrowserRouter(
     createRoutesFromElements(
       <>
-      <Route path="/" element={<HomePage />} />
+
+
+        {
+          loggedInUser?.isAdmin==true?(
+            // admin routes
+            <>
+              <Route path='/admin/dashboard' element={<><ScrollToTop/><AdminDashboardPage/></>}/>
+            <Route path='/admin/product-update/:id' element={<><ScrollToTop/><ProductUpdatePage/></>}/>
+            <Route path='/admin/dailyproduct-update/:id' element={<><ScrollToTop/><DailyProductUpdate/></>}/>
+            <Route path='/admin/add-product' element={<><AddProductPage/></>}/>
+            <Route path='/admin/add-category' element={<><AddCategoryPage/></>}/>
+            <Route path='/admin/orders'  element={<><ScrollToTop/><AdminOrdersPage/></>}/>
+            <Route path='*' element={<Navigate to={'/admin/dashboard'}/>}/>
+            <Route exact path='/product-details/:id' element={<ProductDetailsPage/>}/>
+
+            </>
+          ):(
+            // user routes
+            <>
+                <Route path='*' element={<NotFoundPage/>} />
+        <Route path="/" element={<><HomePage /><ScrollToTop/> <WhatsAppChat phoneNumber="8248222532" message="Hello! I need some help."/> </>} />
+        <Route path="/products" element={<><ScrollToTop/> <WhatsAppChat phoneNumber="8248222532" message="Hello! I need some help."/><Products/></>} />
+
         <Route path='/signup' element={<SignupPage/>}/>
         <Route path='/login' element={<LoginPage/>}/>
         <Route path='/verify-otp' element={<OtpVerificationPage/>}/>
         <Route path='/forgot-password' element={<ForgotPasswordPage/>}/>
         <Route path='/reset-password/:userId/:passwordResetToken' element={<ResetPasswordPage/>}/>
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/aboutus" element={<Aboutus />} />
+        <Route path="/cart" element={<><ScrollToTop/> <WhatsAppChat phoneNumber="8248222532" message="Hello! I need some help."/><CartPage /></>} />
+        <Route path="/aboutus" element={<><ScrollToTop/> <WhatsAppChat phoneNumber="8248222532" message="Hello! I need some help."/><Aboutus /></>} />
+        <Route path="/contactus" element={<><ScrollToTop/> <WhatsAppChat phoneNumber="8248222532" message="Hello! I need some help."/><Contactus /></>} />
         <Route path="/profile" element={<UserProfilePage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/checkout" element={<><ScrollToTop/> <WhatsAppChat phoneNumber="8248222532" message="Hello! I need some help."/><CheckoutPage /></>} />
         <Route path="/order-success/:id" element={<OrderSuccessPage />} />
-        <Route path="/orders" element={<UserOrdersPage />} />
+        <Route path="/orders" element={<><ScrollToTop/> <WhatsAppChat phoneNumber="8248222532" message="Hello! I need some help."/><UserOrdersPage /></>} />
         <Route path="/wishlist" element={<WishlistPage />} />
-        <Route exact path='/logout' element={<Protected><Logout/></Protected>}/>
-        <Route exact path='/product-details/:id' element={<ProductDetailsPage/>}/>
+        <Route  path='/logout' element={<Logout/>}/>
+        <Route exact path='/product-details/:id' element={<><ScrollToTop/> <WhatsAppChat phoneNumber="8248222532" message="Hello! I need some help."/><ProductDetailsPage/></>}/>
 
-        {
-          loggedInUser?.isAdmin?(
-            // admin routes
-            <>
-            <Route path='/admin/dashboard' element={<Protected><AdminDashboardPage/></Protected>}/>
-            <Route path='/admin/product-update/:id' element={<Protected><ProductUpdatePage/></Protected>}/>
-            <Route path='/admin/dailyproduct-update/:id' element={<Protected><DailyProductUpdate/></Protected>}/>
-            <Route path='/admin/add-product' element={<Protected><AddProductPage/></Protected>}/>
-            <Route path='/admin/add-category' element={<Protected><AddCategoryPage/></Protected>}/>
-            <Route path='/admin/orders'  element={<Protected><AdminOrdersPage/></Protected>}/>
-            <Route path='*' element={<Navigate to={'/admin/dashboard'}/>}/>
-            </>
-          ):(
-            // user routes
-            <>
-            {/* <Route path='/' element={<Protected><HomePage/></Protected>}/>
-            <Route path='/cart' element={<Protected><CartPage/></Protected>}/>
-            <Route path='/profile' element={<Protected><UserProfilePage/></Protected>}/>
-            <Route path='/checkout' element={<Protected><CheckoutPage/></Protected>}/>
-            <Route path='/order-success/:id' element={<Protected><OrderSuccessPage/></Protected>}/>
-            <Route path='/orders' element={<Protected><UserOrdersPage/></Protected>}/>
-            <Route path='/wishlist' element={<Protected><WishlistPage/></Protected>}/> */}
             </>
           )
         }
-
-        <Route path='*' element={<NotFoundPage/>} />
 
       </>
     )

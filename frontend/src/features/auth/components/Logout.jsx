@@ -4,18 +4,21 @@ import { logoutAsync, selectLoggedInUser } from '../AuthSlice'
 import { useNavigate } from 'react-router-dom'
 
 export const Logout = () => {
+  // debugger;
     const dispatch=useDispatch()
     const loggedInUser=useSelector(selectLoggedInUser)
     const navigate=useNavigate()
 
     useEffect(()=>{
         dispatch(logoutAsync())
-    },[])
+    },[dispatch])
 
     useEffect(()=>{
-        if(!loggedInUser){
+      console.log("loggedInUser",loggedInUser);
+
+        // if(!loggedInUser){
             navigate("/login")
-        }
+        // }
     },[loggedInUser])
 
   return (

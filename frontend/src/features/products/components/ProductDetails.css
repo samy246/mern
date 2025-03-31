@@ -1,0 +1,16 @@
+.producttitle_pdp:after{
+    content: "";
+    position: absolute;
+    border-bottom: 3px solid #0aad0a;
+    display: block;
+    bottom: -4;
+    left: 0;
+    width: 100%;
+    max-width: 100px;
+}
+
+.producttitle_pdp{
+    font-family: Mesmerize !important;
+    font-size: 26px !important;
+    position: relative;
+}

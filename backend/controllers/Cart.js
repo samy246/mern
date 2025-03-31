@@ -2,6 +2,8 @@ const Cart=require('../models/Cart')
 
 exports.create=async(req,res)=>{
     try {
+        console.log("req.body cart",req.body);
+
         const created=await new Cart(req.body).populate({path:"product",populate:{path:"brand"}});
         await created.save()
         res.status(201).json(created)

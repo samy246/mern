@@ -9,8 +9,10 @@ import { selectWishlistItems } from '../../wishlist/WishlistSlice';
 import { selectLoggedInUser } from '../../auth/AuthSlice';
 import { addToCartAsync,selectCartItems } from '../../cart/CartSlice';
 import {motion} from 'framer-motion'
+import { Category } from '@mui/icons-material';
 
-export const ProductCard = ({id,title,price,thumbnail,brand,stockQuantity,handleAddRemoveFromWishlist,isWishlistCard,isAdminCard}) => {
+export const ProductCard = ({id,title,price,thumbnail,brand,category,stockQuantity,handleAddRemoveFromWishlist,isWishlistCard,isAdminCard}) => {
+console.log("category",category);
 
 
     const navigate=useNavigate()
@@ -47,11 +49,22 @@ export const ProductCard = ({id,title,price,thumbnail,brand,stockQuantity,handle
     {
 
     isProductAlreadyinWishlist!==-1 ?
-    <Stack component={isAdminCard?"":isWishlistCard?"":is408?'':Paper} mt={is408?2:0} elevation={1} p={2} width={is408?'auto':is488?"200px":is608?"240px":is752?"300px":is932?'240px':is1410?'300px':'340px'} sx={{cursor:"pointer"}} onClick={()=>navigate(`/product-details/${id}`)}>
+    <Stack component={isAdminCard?"":isWishlistCard?"":is408?'':Paper} mt={is408?2:0} elevation={1} p={2} width={is408?'auto':is488?"200px":is608?"240px":is752?"300px":is932?'240px':is1410?'300px':'300px'} sx={{cursor:"pointer"}} onClick={()=>navigate(`/product-details/${id}`)}>
 
         {/* image display */}
-        <Stack>
-            <img width={'100%'} style={{aspectRatio:1/1,objectFit:"contain"}} height={'100%'}  src={thumbnail} alt={`${title} photo unavailable`} />
+        <Stack
+       sx={{
+        position: "relative",
+        width: "100%",
+        paddingBottom: "calc(100%)", // Ensure calc() is properly used as a string
+        backgroundSize: "contain", // Ensures full coverage without distortion
+        backgroundRepeat: "no-repeat", // Prevents repetition
+        backgroundPosition: "center", // Centers the image
+        backgroundImage: `url(${thumbnail})`,
+      }}
+  >
+            {/*  */}
+            {/* <img width={'100%'} style={{aspectRatio:1/1,objectFit:"cover"}} height={'100%'}  src={thumbnail} alt={`${title} photo unavailable`} /> */}
         </Stack>
 
         {/* lower section */}
@@ -59,19 +72,20 @@ export const ProductCard = ({id,title,price,thumbnail,brand,stockQuantity,handle
 
             <Stack>
                 <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'}>
-                    <Typography variant='h6' fontWeight={400}>{title}</Typography>
+                    <Typography variant='h6' fontWeight={400} textTransform={'capitalize'}>{title}</Typography>
                     {
-                    !isAdminCard && 
+                    !isAdminCard &&
                     <motion.div whileHover={{scale:1.3,y:-10,zIndex:100}} whileTap={{scale:1}} transition={{duration:.4,type:"spring"}}>
                         <Checkbox onClick={(e)=>e.stopPropagation()} checked={isProductAlreadyinWishlist} onChange={(e)=>handleAddRemoveFromWishlist(e,id)} icon={<FavoriteBorder />} checkedIcon={<Favorite sx={{color:'red'}} />} />
                     </motion.div>
                     }
                 </Stack>
-                <Typography color={"text.secondary"}>{brand}</Typography>
+                <Typography color={"text.secondary"}>Quality:{brand}</Typography>
+                <Typography color={"text.secondary"}>Category:{category}</Typography>
             </Stack>
 
             <Stack sx={{flexDirection:"row",justifyContent:"space-between",alignItems:"center"}}>
-                <Typography>${price}</Typography>
+                <Typography>₹{price}</Typography>
                 {
                     !isWishlistCard? isProductAlreadyInCart?
                     'Added to cart'
@@ -84,7 +98,7 @@ export const ProductCard = ({id,title,price,thumbnail,brand,stockQuantity,handle
                     </motion.button>
                     :''
                 }
-                
+
             </Stack>
             {
                 stockQuantity<=20 && (
@@ -92,12 +106,12 @@ export const ProductCard = ({id,title,price,thumbnail,brand,stockQuantity,handle
                 )
             }
         </Stack>
-    </Stack> 
+    </Stack>
     :''
-    
-    
+
+
     }
-    
+
     </>
   )
 }

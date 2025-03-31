@@ -1,0 +1,37 @@
+{/* brand filters */}
+<Stack mt={2}>
+    <Accordion>
+        <AccordionSummary expandIcon={<AddIcon />}  aria-controls="brand-filters" id="brand-filters" >
+                <Typography>Brands</Typography>
+        </AccordionSummary>
+
+        <AccordionDetails sx={{p:0}}>
+            <FormGroup onChange={handleBrandFilters}>
+                {
+                    brands?.map((brand)=>(
+                        <motion.div key={brand._id} style={{width:"fit-content"}} whileHover={{x:5}} whileTap={{scale:0.9}}>
+                            <FormControlLabel 
+                                sx={{ml:1}} 
+                                control={
+                                    <Checkbox 
+                                        checked={!!brandCheckboxState[brand._id]} 
+                                        onChange={(e) => {
+                                            // Ensure the checkbox state is updated
+                                            setBrandCheckboxState(prev => ({
+                                                ...prev,
+                                                [brand._id]: e.target.checked
+                                            }));
+                                        }}
+                                        whileHover={{scale:1.1}} 
+                                    />
+                                } 
+                                label={brand.name}  
+                                value={brand._id} 
+                            />
+                        </motion.div>
+                    ))
+                }
+            </FormGroup>
+        </AccordionDetails>
+    </Accordion>
+</Stack>

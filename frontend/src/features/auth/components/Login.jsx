@@ -163,7 +163,7 @@ export const Login = () => {
 
                       <MotionConfig whileHover={{x:2}} whileTap={{scale:1.050}}>
                           <motion.div>
-                              {/* <Typography mr={'1.5rem'} sx={{textDecoration:"none",color:"text.primary"}} to={'/forgot-password'} component={Link}>Forgot password</Typography> */}
+                              <Typography mr={'1.5rem'} sx={{textDecoration:"none",color:"white"}} to={'/forgot-password'} component={Link}>Forgot password</Typography>
                           </motion.div>
 
                           <motion.div>

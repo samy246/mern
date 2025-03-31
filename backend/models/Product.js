@@ -43,7 +43,13 @@ const productSchema= new Schema({
     isDeleted:{
         type:Boolean,
         default:false
-    }
+    },
+    quantity: [
+        {
+            weight: { type: String},
+            price: { type: String }
+        }
+    ],
 },{timestamps:true,versionKey:false})
 
 module.exports=mongoose.model('Product',productSchema)

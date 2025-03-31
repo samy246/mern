@@ -15,6 +15,9 @@ const cartSchema=new Schema({
     quantity:{
         type:Number,
         default:1,
+    },
+    weight:{
+        type:String,
     }
 },{versionKey:false})
 

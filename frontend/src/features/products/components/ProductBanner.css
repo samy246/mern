@@ -1,0 +1,145 @@
+.banner-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.banner-slider {
+    width: 100%;
+    overflow: hidden;
+}
+
+.banner-slide {
+    position: relative;
+    width: 100%;
+}
+
+.banner-image {
+    width: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.banner-content {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    color: white;
+    text-align: center;
+    align-items: center;
+    opacity: 0;
+    width: 80%;
+    max-width: 600px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.banner-content.active {
+    opacity: 1;
+    pointer-events: auto;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.banner-title {
+    font-size: 2rem;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+.banner-content.active .banner-title {
+    animation: slideDown 0.8s ease-out 0.3s forwards;
+}
+
+.banner-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    opacity: 0;
+    transform: translateY(20px);
+    background-color: #0aad0a !important;
+    display: block;
+}
+
+.banner-content.active .banner-button {
+    animation: slideUp 0.8s ease-out 0.6s forwards;
+}
+
+/* Custom dots navigation */
+.banner-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.banner-dot {
+    width: 20px;
+    height: 3px;
+    /* border-radius: 50%; */
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.banner-dot.active {
+    background-color: #0aad0a;
+    transform: scale(1.2);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .banner-button {
+        padding: 8px 16px !important; /* Reduce padding */
+        font-size: 0.875rem !important; /* Reduce font size */
+    }
+    .banner-content{
+        bottom: 10% !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner-button {
+        padding: 4px 18px !important; /* Further reduce padding */
+        font-size: 0.75rem !important; /* Further reduce font size */
+    }
+    .banner-content{
+        bottom: 5% !important;
+    }
+}
+
+@media  (min-width:1400px){
+    .banner-content{
+        bottom: 20% !important;
+    }
+}

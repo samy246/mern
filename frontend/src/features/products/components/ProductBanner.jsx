@@ -1,50 +1,66 @@
+
+// second
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
-import MobileStepper from '@mui/material/MobileStepper';
-import { Box, useTheme } from '@mui/material';
+import { Box, useTheme, Button, Typography } from '@mui/material';
 import { useState } from 'react';
+import './ProductBanner.css';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-export const ProductBanner = ({images}) => {
-
-    const theme=useTheme()
-
+export const ProductBanner = ({ banners }) => {
+    const theme = useTheme();
     const [activeStep, setActiveStep] = useState(0);
-    const maxSteps = images.length;
-
-    const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    };
-
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
+    const maxSteps = banners.length;
 
     const handleStepChange = (step) => {
         setActiveStep(step);
     };
 
-  return (
-    <>
-    <AutoPlaySwipeableViews style={{overflow:"hidden"}} width={'100%'} height={'100%'} axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={activeStep} onChangeIndex={handleStepChange} enableMouseEvents >
-        {
-        images.map((image,index) => (
-        <div key={index} style={{width:"100%",height:'100%'}}>
-            {
-            Math.abs(activeStep - index) <= 2 
-                ?
-                <Box component="img" sx={{width:'100%',objectFit:"contain"}} src={image} alt={'Banner Image'} />
-                :
-                    null
-            }
+    return (
+        <div className="banner-container">
+            <AutoPlaySwipeableViews
+                className="banner-slider"
+                axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+                index={activeStep}
+                interval={5000}
+                onChangeIndex={handleStepChange}
+                enableMouseEvents
+            >
+                {banners?.map((banner, index) => (
+                    <div key={index} className={`banner-slide ${activeStep === index ? 'active' : ''}`}>
+                        <Box
+                            component="img"
+                            className="banner-image"
+                            src={banner.image}
+                            alt={`Banner ${index + 1}`}
+                        />
+                        <div className={`banner-content ${activeStep === index ? 'active' : ''}`}>
+                            <Typography variant="h4" className="banner-title">
+                                {banner.text}
+                            </Typography>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                className="banner-button"
+                                href={banner.link}
+                            >
+                                {banner.buttonText}
+                            </Button>
+                        </div>
+                    </div>
+                ))}
+            </AutoPlaySwipeableViews>
+
+            <div className="banner-dots">
+                {banners.map((_, index) => (
+                    <div
+                        key={index}
+                        className={`banner-dot ${activeStep === index ? 'active' : ''}`}
+                        onClick={() => handleStepChange(index)}
+                    />
+                ))}
+            </div>
         </div>
-        ))
-        }
-    </AutoPlaySwipeableViews>
-    <div style={{alignSelf:'center'}}>
-        <MobileStepper steps={maxSteps} position="static" activeStep={activeStep}/>
-    </div>
-    </>
-  )
-}
+    );
+};

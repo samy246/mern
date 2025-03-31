@@ -2,11 +2,7 @@ const mongoose=require("mongoose")
 const {Schema}=mongoose
 
 const orderSchema=new Schema({
-    user:{
-        type:Schema.Types.ObjectId,
-        ref:"User",
-        required:true
-    },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User",required:true },
     item:{
         type:[Schema.Types.Mixed],
         required:true
@@ -22,12 +18,18 @@ const orderSchema=new Schema({
     },
     paymentMode:{
         type:String,
-        enum:['COD','UPI','CARD'],
+        enum:['QRCODE','GPAYANDPHONEPAY','BANKACCOUNT'],
         required:true
     },
-    total:{
-        type:Number,
-        required:true
+    shipping:{
+        type: Number,
+        required: true,
+        set: v => parseFloat(v).toFixed(2)
+    },
+    total: {
+        type: Number,
+        required: true,
+        set: v => parseFloat(v).toFixed(2)
     },
     createdAt:{
         type:Date,

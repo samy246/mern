@@ -33,12 +33,17 @@ import { Navigate, useLocation } from "react-router";
 export const Protected = ({ children }) => {
   const loggedInUser = useSelector(selectLoggedInUser);
   const location = useLocation();
-
+console.log("loggedInUser36",loggedInUser);
+    if (location.pathname === "/logout") {
+      return children;
+    }
   // Allow access to HomePage for all users
   if (location.pathname === "/") {
     return children;
   }
-
+  if (loggedInUser?.isAdmin==true) {
+    return <Navigate to="/admin/dashboard"  />;
+  }
   // Redirect to HomePage if the user is not logged in or verified
   if (!loggedInUser || !loggedInUser.isVerified) {
     // Avoid redirect loop: don't navigate to `/` if already there
