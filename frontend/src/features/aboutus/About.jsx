@@ -106,9 +106,10 @@ export const About = () => {
               transition={{ duration: 1 }}
             >
               <Typography variant="h6" textAlign="justify">
-                We bring you the finest selection of spices from around the world, carefully curated
+              At Thekkady spices , we are dedicated to bringing you the finest spices, dry fruits, nuts, seeds, and masalas, all grown and sourced directly from our own estate. With a commitment to quality and authenticity, we carefully cultivate, clean, and package our products to preserve their natural flavor, aroma, and freshness.
+                {/* We bring you the finest selection of spices from around the world, carefully curated
                 for quality and freshness. Each spice tells a story of tradition, flavor, and
-                authenticity.
+                authenticity. */}
               </Typography>
             </motion.div>
           </Grid>
@@ -121,8 +122,9 @@ export const About = () => {
               transition={{ duration: 1 }}
             >
               <Typography variant="h6" textAlign="justify">
-                Our sustainable sourcing and fair trade practices ensure that every spice you buy
-                supports local farmers and promotes environmental responsibility.
+              From the fields to your kitchen, we personally oversee every stage of the process, ensuring the highest standards of purity, hygiene, and excellence. Whether it’s the rich aroma of our spices, the wholesome goodness of our dry fruits and nuts, or the perfect blend of our masalas, we guarantee premium quality in every pack.
+                {/* Our sustainable sourcing and fair trade practices ensure that every spice you buy
+                supports local farmers and promotes environmental responsibility. */}
               </Typography>
             </motion.div>
           </Grid>
@@ -192,7 +194,8 @@ export const About = () => {
                 sx={{ fontSize: { xs: "5vw", md: "2rem" }, color: "#eb4a05" }}
                 fontWeight={500}
               >
-                "Bringing the world's best spices to your kitchen."
+                Experience the true taste of nature with Thekkady spices where quality and tradition come together.
+                {/* "Bringing the world's best spices to your kitchen." */}
               </Typography>
             </motion.div>
           </Box>
