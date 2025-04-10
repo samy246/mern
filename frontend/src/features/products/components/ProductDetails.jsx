@@ -661,87 +661,13 @@ const handleIncreaseQty = () => {
     Add To Cart
   </motion.button>
 )}
-                        {/* {isProductAlreadyInCart ? (
-                          <button
-                            style={{
-                              padding: "10px 15px",
-                              fontSize: "1.050rem",
-                              backgroundColor: "#0aad0a",
-                              color: "white",
-                              outline: "none",
-                              border: "none",
-                              borderRadius: "8px",
-                              cursor: "pointer",
-                            }}
-                            onClick={() => navigate("/cart")}
-                          >
-                            In Cart
-                          </button>
-                        ) : (
-                          <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 1 }}
-                            onClick={handleAddToCart}
-                            style={{
-                              padding: "10px 15px",
-                              fontSize: "1.050rem",
-                              backgroundColor: "#0aad0a",
-                              color: "white",
-                              outline: "none",
-                              border: "none",
-                              borderRadius: "8px",
-                              cursor: "pointer",
-                            }}
-                          >
-                            Add To Cart
-                          </motion.button>
-                        )} */}
 
-                        {/* wishlist */}
-                        {/* <motion.div
-                          style={{
-                            border: "1px solid grayText",
-                            borderRadius: "4px",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        >
-                          <Checkbox
-                            checked={isProductAlreadyinWishlist}
-                            onChange={(e) => handleAddRemoveFromWishlist(e)}
-                            icon={<FavoriteBorder />}
-                            checkedIcon={<Favorite sx={{ color: "red" }} />}
-                          />
-                        </motion.div> */}
                       </Stack>
                     </Stack>
                   )}
 
                   {/* product perks */}
-                  {/* <Stack mt={3} sx={{justifyContent:"center",alignItems:'center',border:"1px grayText solid",borderRadius:"7px"}}>
 
-                            <Stack p={2} flexDirection={'row'} alignItems={"center"} columnGap={'1rem'} width={'100%'} justifyContent={'flex-sart'}>
-                                <Box>
-                                    <LocalShippingOutlinedIcon/>
-                                </Box>
-                                <Stack>
-                                    <Typography>Free Delivery</Typography>
-                                    <Typography>Enter your postal for delivery availabity</Typography>
-                                </Stack>
-                            </Stack>
-                            <hr style={{width:"100%"}} />
-                            <Stack p={2} flexDirection={'row'} alignItems={"center"} width={'100%'} columnGap={'1rem'} justifyContent={'flex-start'}>
-                                <Box>
-                                    <CachedOutlinedIcon/>
-                                </Box>
-                                <Stack>
-                                    <Typography>Return Delivery</Typography>
-                                    <Typography>Free 30 Days Delivery Returns</Typography>
-                                </Stack>
-                            </Stack>
-
-                        </Stack> */}
                 </Stack>
               </Stack>
 

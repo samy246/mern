@@ -33,20 +33,74 @@ export const Cart = forwardRef(({ checkout, onShippingValidated, onShippingDataC
     const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
 
     // Calculate total weight of items for courier pricing
-    const totalWeight = items.reduce((acc, item) => {
-        // Extract weight in kg from the weight string (e.g., "100g" -> 0.1)
-        const weightValue = parseFloat(item.weight) || 0;
-        const weightUnit = item.weight.replace(/[0-9.]/g, '').toLowerCase();
+    // const totalWeight = items.reduce((acc, item) => {
+    //     // Extract weight in kg from the weight string (e.g., "100g" -> 0.1)
+    //     const weightValue = parseFloat(item.weight) || 0;
+    //     const weightUnit = item.weight.replace(/[0-9.]/g, '').toLowerCase();
 
-        let weightInKg = weightValue;
-        if (weightUnit.includes('g')) {
-            weightInKg = weightValue / 1000;
-        }
+    //     let weightInKg = weightValue;
+    //     if (weightUnit.includes('g')) {
+    //         weightInKg = weightValue / 1000;
+    //     }
 
-        return acc + (weightInKg * item.quantity);
-    }, 0);
+    //     return acc + (weightInKg * item.quantity);
+    // }, 0);
+// In your total weight calculation
+const totalWeight = items.reduce((acc, item) => {
+    console.log("Item:", item.product.title);
+    console.log("Raw weight string:", item.weight);
+    console.log("Quantity:", item.quantity);
 
+    const weightValue = parseFloat(item.weight) || 0;
+    console.log("Parsed weight value:", weightValue);
+
+    const weightUnit = item.weight.replace(/[0-9.]/g, '').toLowerCase();
+    console.log("Weight unit:", weightUnit);
+
+    let weightInKg = weightValue;
+    if (weightUnit.includes('g') && !weightUnit.includes('kg')) {
+        weightInKg = weightValue / 1000;
+    }
+    console.log("Weight in kg:", weightInKg);
+    console.log("Weight × quantity:", weightInKg * item.quantity);
+
+    return acc + (weightInKg * item.quantity);
+}, 0);
+
+console.log("FINAL TOTAL WEIGHT:", totalWeight);
     // Calculate shipping cost based on selection
+    // const calculateShippingCost = () => {
+    //     if (shippingMethod === 'parcel' && selectedParcelService) {
+    //         // All parcel services have fixed 70 Rs charge
+    //         return 70;
+    //     } else if (shippingMethod === 'courier' && selectedCourierService) {
+    //         // Courier pricing: 30 Rs for first kg, 25 Rs for each additional kg
+    //         const courier = COURIER_SERVICES[0];
+
+    //         if (totalWeight <= 1) {
+    //             return courier.rates.base;
+    //         } else {
+    //             console.log("Using courier service:", courier.name);
+    //             console.log("Base rate:", courier.rates.base, "Rs");
+    //             console.log("Additional rate per kg:", courier.rates.additional, "Rs");
+
+    //             if (totalWeight <= 1) {
+    //                 console.log("Weight <= 1kg, charging only base rate");
+    //                 return courier.rates.base;
+    //             } else {
+    //                 const additionalWeight = Math.ceil(totalWeight - 1);
+    //                 console.log("Weight > 1kg, calculating additional charges");
+    //                 console.log("Additional weight (rounded up):", additionalWeight, "kg");
+
+    //                 const totalCost = courier.rates.base + (additionalWeight * courier.rates.additional);
+    //                 console.log("Total cost:", totalCost, "Rs");
+    //                 return totalCost;
+    //             }
+    //             // return courier.rates.base + Math.ceil(totalWeight - 1) * courier.rates.additional;
+    //         }
+    //     }
+    //     return 0;
+    // };
     const calculateShippingCost = () => {
         if (shippingMethod === 'parcel' && selectedParcelService) {
             // All parcel services have fixed 70 Rs charge
@@ -54,15 +108,27 @@ export const Cart = forwardRef(({ checkout, onShippingValidated, onShippingDataC
         } else if (shippingMethod === 'courier' && selectedCourierService) {
             // Courier pricing: 30 Rs for first kg, 25 Rs for each additional kg
             const courier = COURIER_SERVICES[0];
+
+            console.log("Using courier service:", courier.name);
+            console.log("Base rate:", courier.rates.base, "Rs");
+            console.log("Additional rate per kg:", courier.rates.additional, "Rs");
+            console.log("Total weight:", totalWeight, "kg");
+
             if (totalWeight <= 1) {
+                console.log("Weight <= 1kg, charging only base rate");
                 return courier.rates.base;
             } else {
-                return courier.rates.base + Math.ceil(totalWeight - 1) * courier.rates.additional;
+                const additionalWeight = Math.ceil(totalWeight - 1);
+                console.log("Weight > 1kg, calculating additional charges");
+                console.log("Additional weight (rounded up):", additionalWeight, "kg");
+
+                const totalCost = courier.rates.base + (additionalWeight * courier.rates.additional);
+                console.log("Total cost:", totalCost, "Rs");
+                return totalCost;
             }
         }
         return 0;
     };
-
     const shippingCost = calculateShippingCost();
 
     // Check if shipping selection is valid
@@ -180,6 +246,7 @@ console.log("method value",event.target.value);
         } else if (event.target.value === 'courier') {
             setSelectedCourierService(COURIER_SERVICES[0].name);
             setSelectedParcelService('');
+            // calculateShippingCost()
         }
 
         // Hide validation error when user starts making selections
@@ -200,6 +267,7 @@ console.log("method value",event.target.value);
         setSelectedCourierService(event.target.value);
         // Hide validation error when user selects a service
         setShowValidationError(false);
+        // calculateShippingCost()
     };
 
     // Method to validate shipping before checkout

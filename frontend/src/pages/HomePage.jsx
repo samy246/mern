@@ -21,7 +21,7 @@ import whole from "../assets/images/whole.webp"
 import cardomon from "../assets/images/cardomon.webp"
 import turmeric from "../assets/images/turmeric.webp"
 import saffron from "../assets/images/saffron.webp"
-
+import homerightside from "../assets/images/homerightside.webp"
 export const HomePage = () => {
   const theme = useTheme()
   const sliderRef = useRef(null);
@@ -351,7 +351,10 @@ All Spices
             <p>For longer user, keep it refrigerated giving it the right taste and more flavourful vibrant to these tasteful Products.</p>
           </Stack>
           <Stack className="image">
-            <img alt="Storing Your Favourite Dates, Dry Fruits and Nuts!" title="Storing Your Favourite Dates, Dry Fruits and Nuts!" src="//ajfan.store/cdn/shop/files/top-view-autumnal-bowl-with-pine-cones-copy-space_4_O1.jpg?v=1701162668" loading="lazy"/>
+            <img alt="Storing Your Favourite Dates, Dry Fruits and Nuts!" title="Storing Your Favourite Dates, Dry Fruits and Nuts!"
+            // src="//ajfan.store/cdn/shop/files/top-view-autumnal-bowl-with-pine-cones-copy-space_4_O1.jpg?v=1701162668"
+            src={homerightside}
+            loading="lazy"/>
           </Stack>
         </Stack>
       </Stack>
@@ -361,67 +364,3 @@ All Spices
   )
 }
 {/* <ProductList/>All Products */}
-    {/* <div class="homeTesti show">
-  <div class="container">
-    <h2 class="titleH2">what our customer say</h2>
-    <img src="//ajfan.store/cdn/shop/t/27/assets/testiComma.svg?v=98595341531678472661698308260" width="47" height="37" alt="Testimonial Comma" title="Testimonial Comma" loading="lazy"/>
-    <div class="testiSlider slick-initialized slick-slider">
-        <img class="slick-arrow slick-prev" src="//ajfan.store/cdn/shop/t/27/assets/leftBtn.svg?v=48845452678412058321698308260" alt="Slick Arrow" title="Slick Arrow" />
-        <div class="slick-list draggable"><div class="slick-track"
-        style={{ opacity: "1",
-          width: "6741px",
-          transform: "translate3d(-1498px, 0px, 0px)",
-          transition: "transform 1500ms"}}
-        // opacity: 1; width: 6741px; transform: translate3d(-1498px, 0px, 0px); transition: transform 1500ms;
-        // "
-        ><div class="slick-slide slick-cloned" data-slick-index="-1" id="" aria-hidden="true" style={{width:"749px"}} tabindex="-1">
-            <div><div class="eachTesti" style={{width:"100%",display:"inline-block"}}>
-          <p>It is the best sweet shop as the name standard it surely lives upto it's name one must really try their sweet products</p>
-          <h3>fenna</h3>
-        </div></div></div>
-        <div class="slick-slide" data-slick-index="0" aria-hidden="true" style={{width:"749px"}}>
-          <div><div class="eachTesti" style={{width:"100%",display:"inline-block"}}>
-          <p>Packaging at its best best place to buy quality sweets and delicious sweets all the best time to the whole team</p>
-          <h3>swathi p</h3>
-        </div></div></div>
-        <div class="slick-slide slick-current slick-active" data-slick-index="1" aria-hidden="false" style={{width:"749px"}} tabindex="-1">
-          <div><div class="eachTesti" style={{width:"100%",display:"inline-block"}}>
-          <p>I love sweets here all must try here it's very impressive that we can get our home food where ever we want</p>
-          <h3>sreerasmi</h3>
-        </div></div></div>
-        <div class="slick-slide" data-slick-index="2" aria-hidden="true" style={{width:"749px"}} tabindex="-1">
-          <div><div class="eachTesti" style={{width:"100%",display:"inline-block"}}>
-          <p>For the quality definitely needs a good rating and review thats why came here .. very delicious whole family enjoied it.. think how it would be after 2 to 3 days but very well packed and came safely ??packaging needs a special appreciation??</p>
-          <h3>sruthi kk</h3>
-        </div></div></div>
-        <div class="slick-slide" data-slick-index="3" aria-hidden="true" style={{width:"749px"}} tabindex="-1"
-         ><div><div class="eachTesti" style={{width:"100%",display:"inline-block"}}>
-          <p>It is the best sweet shop as the name standard it surely lives upto it's name one must really try their sweet products</p>
-          <h3>fenna</h3>
-        </div></div></div>
-        <div class="slick-slide slick-cloned" data-slick-index="4" id="" aria-hidden="true" style={{width:"749px"}} tabindex="-1">
-          <div>
-            <div class="eachTesti" style={{width:"100%",display:"inline-block"}}>
-          <p>Packaging at its best best place to buy quality sweets and delicious sweets all the best time to the whole team</p>
-          <h3>swathi p</h3>
-        </div></div></div>
-        <div class="slick-slide slick-cloned" data-slick-index="5" id="" aria-hidden="true" style={{width:"749px"}} tabindex="-1">
-          <div>
-          <div class="eachTesti" style={{width:"100%",display:"inline-block"}}>
-          <p>I love sweets here all must try here it's very impressive that we can get our home food where ever we want</p>
-          <h3>sreerasmi</h3>
-        </div></div></div>
-        <div class="slick-slide slick-cloned" data-slick-index="6" id="" aria-hidden="true" style={{width:"749px"}} tabindex="-1"><div>
-          <div class="eachTesti" style={{width:"100%",display:"inline-block"}}>
-          <p>For the quality definitely needs a good rating and review thats why came here .. very delicious whole family enjoied it.. think how it would be after 2 to 3 days but very well packed and came safely ??packaging needs a special appreciation??</p>
-          <h3>sruthi kk</h3>
-        </div></div></div>
-        <div class="slick-slide slick-cloned" data-slick-index="7" id="" aria-hidden="true" style={{width:"749px"}} tabindex="-1"><div>
-          <div class="eachTesti" style={{width:"100%",display:"inline-block"}}>
-          <p>It is the best sweet shop as the name standard it surely lives upto it's name one must really try their sweet products</p>
-          <h3>fenna</h3>
-        </div></div></div></div></div>
-        <img class="slick-arrow slick-next" src="//ajfan.store/cdn/shop/t/27/assets/rightBtn.svg?v=178201285615856641041698308260" alt="Slick Arrow" />
-        </div>
-  </div>
-</div> */}

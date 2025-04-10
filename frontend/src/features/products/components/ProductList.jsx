@@ -316,7 +316,7 @@
 // }
 // new
 import {FormControl, Grid, IconButton,Button, InputLabel,TextField,InputAdornment, MenuItem, Select, Stack, Typography, useMediaQuery, useTheme,Chip } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProductsAsync, fetchdailyProductsAsync, resetProductFetchStatus, selectProductFetchStatus, selectProductIsFilterOpen, selectProductTotalResults, selectProducts, toggleFilters } from '../ProductSlice'
 import { ProductCard } from './ProductCard'
@@ -658,11 +658,37 @@ const clearBrandFilters = () => {
             handleSearchSubmit()
         }
     }
+    const filterPanelRef = useRef(null);
+
+    // Add this useEffect to handle clicks outside
+    useEffect(() => {
+      const handleClickOutside = (event) => {
+        if (filterPanelRef.current && !filterPanelRef.current.contains(event.target) && isProductFilterOpen) {
+          handleFilterClose();
+        }
+      };
+
+      // Add event listener when filter is open
+      if (isProductFilterOpen) {
+        document.addEventListener('mousedown', handleClickOutside);
+      }
+
+      // Cleanup function to remove event listener
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }, [isProductFilterOpen]);
   return (
     <>
     {/* filters side bar */}
 
-    <motion.div style={{position:"fixed",backgroundColor:"rgb(255, 252, 240)",top:"5rem",height:"100vh",padding:'1rem',overflowY:"scroll",width:is500?"100vw":"30rem",zIndex:500}}  variants={{show:{left:0},hide:{left:-500}}} initial={'hide'} transition={{ease:"easeInOut",duration:.7,type:"spring"}} animate={isProductFilterOpen===true?"show":"hide"}>
+    <motion.div
+    ref={filterPanelRef}
+    style={{position:"fixed",backgroundColor:"rgb(255, 252, 240)",top:"5rem",height:"100vh",padding:'1rem',overflowY:"scroll",width:is500?"100vw":"30rem",zIndex:500}}
+    variants={{show:{left:0},hide:{left:-500}}}
+    initial={'hide'}
+    transition={{ease:"easeInOut",duration:.7,type:"spring"}}
+    animate={isProductFilterOpen===true?"show":"hide"}>
 
         {/* fitlers section */}
         <Stack mb={'5rem'}  sx={{scrollBehavior:"smooth",overflowY:"scroll"}}>
@@ -690,7 +716,7 @@ const clearBrandFilters = () => {
                 <Stack mt={2}>
                     <Accordion>
                         <AccordionSummary expandIcon={<AddIcon />}  aria-controls="brand-filters" id="brand-filters" >
-                                <Typography>Brands</Typography>
+                                <Typography>Quality</Typography>
                         </AccordionSummary>
 
                         <AccordionDetails sx={{p:0}}>
@@ -725,11 +751,13 @@ const clearBrandFilters = () => {
                                 {
                                     categories?.map((category)=>(
                                         <motion.div key={category._id} style={{width:"fit-content"}} whileHover={{x:5}} whileTap={{scale:0.9}}>
-                                            <FormControlLabel sx={{ml:1}} control={<Checkbox whileHover={{scale:1.1}} />} label={category.name}   checked={!!categoryCheckboxState[category._id]}   onChange={(e) => {
+                                            <FormControlLabel sx={{ml:1}} control={<Checkbox whileHover={{scale:1.1}} />} label={category.name}   checked={!!categoryCheckboxState[category._id]}
+                                             onChange={(e) => {
                                             setCategoryCheckboxState(prev => ({
                                                 ...prev,
                                                 [category._id]: e.target.checked
                                             }));
+                                            handleFilterClose()
                                         }} value={category._id} />
                                         </motion.div>
                                     ))
@@ -969,7 +997,7 @@ const clearBrandFilters = () => {
                             id={product._id}
                             title={product.title}
                             thumbnail={product.thumbnail}
-                            brand={product.brand.name}
+                            brand={product?.brand?.name}
                             price={minPrice} // Pass the lowest price
                             category={product?.category?.name}
                             handleAddRemoveFromWishlist={handleAddRemoveFromWishlist}
