@@ -31,13 +31,22 @@ exports.getAll = async (req, res) => {
         }
 
         // Brand filter
+        // if (req.query.brand) {
+        //     filter.brand = { $in: req.query.brand }
+        // }
+
+        // // Category filter
+        // if (req.query.category) {
+        //     filter.category = { $in: req.query.category }
+        // }
         if (req.query.brand) {
-            filter.brand = { $in: req.query.brand }
+            const brandArray = Array.isArray(req.query.brand) ? req.query.brand : [req.query.brand];
+            filter.brand = { $in: brandArray.map(id => new mongoose.Types.ObjectId(id)) }; // ✅ fix
         }
 
-        // Category filter
         if (req.query.category) {
-            filter.category = { $in: req.query.category }
+            const categoryArray = Array.isArray(req.query.category) ? req.query.category : [req.query.category];
+            filter.category = { $in: categoryArray.map(id => new mongoose.Types.ObjectId(id)) }; // ✅ fix
         }
 
         // User-specific filter
