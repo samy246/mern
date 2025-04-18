@@ -290,18 +290,18 @@ console.log("method value",event.target.value);
                 {
                     items && items.map((item) => (
                         <CartItem
-                            key={item._id}
-                            id={item._id}
-                            title={item.product.title}
-                            brand={item.product.brand.name}
-                            category={item.product.category.name}
-                            price={getPriceForWeight(item.product, item.weight)}
-                            quantity={item.quantity}
-                            thumbnail={item.product.thumbnail}
-                            stockQuantity={item.product.stockQuantity}
-                            productId={item.product._id}
-                            selectedWeight={item.weight}
-                            weightOptions={item.product.quantity}
+                            key={item?._id}
+                            id={item?._id}
+                            title={item?.product?.title}
+                            brand={item?.product?.brand?.name}
+                            category={item?.product?.category?.name}
+                            price={getPriceForWeight(item?.product, item?.weight)}
+                            quantity={item?.quantity}
+                            thumbnail={item?.product?.thumbnail}
+                            stockQuantity={item?.product?.stockQuantity}
+                            productId={item?.product?._id}
+                            selectedWeight={item?.weight}
+                            weightOptions={item?.product?.quantity}
                         />
                     ))
                 }
