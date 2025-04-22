@@ -3,12 +3,17 @@ import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import own1 from "../../../src/assets/images/own1.webp";
 import own2 from "../../../src/assets/images/own2.webp";
-import aboutbanner from "../../assets/images/aboutbanner.webp";
-import abouttitlebanner from "../../assets/images/abouttitlebanner.webp"
-
+import aboutbanner from "../../assets/images/aboutbanner.jpg"
+// .webp";
+import abouttitlebanner from "../../assets/images/abouttitlebanner.jpg"
+// webp"
+import { useMeta } from "../../hooks/useMeta";
 export const About = () => {
   const pageRef = useRef(null);
-
+  useMeta({
+    title: "AboutUs | Thekkady Spices",
+    description: "Thekkady Spices"
+  });
   useEffect(() => {
     pageRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
@@ -191,7 +196,8 @@ export const About = () => {
             >
               <Typography
                 variant="h5"
-                sx={{ fontSize: { xs: "5vw", md: "2rem" }, color: "#eb4a05" }}
+                // #eb4a05
+                sx={{ fontSize: { xs: "5vw", md: "2rem" }, color: "#FFFFFF" }}
                 fontWeight={500}
               >
                 Experience the true taste of nature with Thekkady spices where quality and tradition come together.

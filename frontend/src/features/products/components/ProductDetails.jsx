@@ -58,7 +58,7 @@ import MobileStepper from "@mui/material/MobileStepper";
 import Lottie from "lottie-react";
 import { loadingAnimation } from "../../../assets";
 import "./ProductDetails.css";
-
+import { useMeta } from "../../../hooks/useMeta";
 const SIZES = ["XS", "S", "M", "L", "XL"];
 const COLORS = ["#020202", "#F6F6F6", "#B82222", "#BEA9A9", "#E2BB8D"];
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
@@ -67,6 +67,10 @@ export const ProductDetails = () => {
   const { id } = useParams();
   const product = useSelector(selectSelectedProduct);
   console.log("pdp", product);
+    useMeta({
+      title: `${product?.title} | Thekkady Spices`,
+      description: "Thekkady Spices"
+    });
   const [quantity, setQuantity] = useState(1);
   const [selectedWeight, setSelectedWeight] = useState(null);
   useEffect(() => {

@@ -22,7 +22,12 @@ import cardomon from "../assets/images/cardomon.webp"
 import turmeric from "../assets/images/turmeric.webp"
 import saffron from "../assets/images/saffron.webp"
 import homerightside from "../assets/images/homerightside.webp"
+import { useMeta } from '../hooks/useMeta'
 export const HomePage = () => {
+  useMeta({
+    title: "Home | Thekkady Spices",
+    description: "Thekkady Spices"
+  });
   const theme = useTheme()
   const sliderRef = useRef(null);
 
