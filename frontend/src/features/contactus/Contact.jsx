@@ -3,7 +3,12 @@ import { useState } from "react";
 import "./Contact.css"; // Create this CSS file
 import { toast } from "react-toastify";
 import { axiosi } from "../../config/axios";
+import { useMeta } from "../../hooks/useMeta";
 export const Contact = () => {
+    useMeta({
+      title: "ContactUs | Thekkady Spices",
+      description: "Thekkady Spices"
+    });
   const [formData, setFormData] = useState({
     name: "",
     email: "",
