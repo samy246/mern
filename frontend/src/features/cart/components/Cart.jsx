@@ -122,7 +122,7 @@ console.log("FINAL TOTAL WEIGHT:", totalWeight);
                 console.log("Weight > 1kg, calculating additional charges");
                 console.log("Additional weight (rounded up):", additionalWeight, "kg");
 
-                const totalCost = courier.rates.base + (additionalWeight * courier.rates.additional);
+                const totalCost = (totalWeight * courier.rates.additional);
                 console.log("Total cost:", totalCost, "Rs");
                 return totalCost;
             }
