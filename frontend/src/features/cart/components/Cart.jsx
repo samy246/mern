@@ -46,6 +46,28 @@ export const Cart = forwardRef(({ checkout, onShippingValidated, onShippingDataC
     //     return acc + (weightInKg * item.quantity);
     // }, 0);
 // In your total weight calculation
+// old totalweight
+// const totalWeight = items.reduce((acc, item) => {
+//     console.log("Item:", item.product.title);
+//     console.log("Raw weight string:", item.weight);
+//     console.log("Quantity:", item.quantity);
+
+//     const weightValue = parseFloat(item.weight) || 0;
+//     console.log("Parsed weight value:", weightValue);
+
+//     const weightUnit = item.weight.replace(/[0-9.]/g, '').toLowerCase();
+//     console.log("Weight unit:", weightUnit);
+
+//     let weightInKg = weightValue;
+//     if (weightUnit.includes('g') && !weightUnit.includes('kg')) {
+//         weightInKg = weightValue / 1000;
+//     }
+//     console.log("Weight in kg:", weightInKg);
+//     console.log("Weight × quantity:", weightInKg * item.quantity);
+
+//     return acc + (weightInKg * item.quantity);
+// }, 0);
+// newkg and litre
 const totalWeight = items.reduce((acc, item) => {
     console.log("Item:", item.product.title);
     console.log("Raw weight string:", item.weight);
@@ -54,13 +76,19 @@ const totalWeight = items.reduce((acc, item) => {
     const weightValue = parseFloat(item.weight) || 0;
     console.log("Parsed weight value:", weightValue);
 
-    const weightUnit = item.weight.replace(/[0-9.]/g, '').toLowerCase();
+    const weightUnit = item.weight.replace(/[0-9.\s]/g, '').toLowerCase();
     console.log("Weight unit:", weightUnit);
 
     let weightInKg = weightValue;
+
     if (weightUnit.includes('g') && !weightUnit.includes('kg')) {
-        weightInKg = weightValue / 1000;
+        weightInKg = weightValue / 1000; // grams to kg
+    } else if (weightUnit.includes('ml')) {
+        weightInKg = weightValue / 1000; // ml to kg (assuming 1L = 1kg)
+    } else if (weightUnit.includes('l')) {
+        weightInKg = weightValue; // 1L = 1kg
     }
+
     console.log("Weight in kg:", weightInKg);
     console.log("Weight × quantity:", weightInKg * item.quantity);
 
