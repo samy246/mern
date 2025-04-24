@@ -343,7 +343,7 @@ console.log("Total:", total);
     }
 
     return (
-        <Stack flexDirection={'row'} p={2} rowGap={10} justifyContent={'center'} flexWrap={'wrap'} mb={'5rem'} mt={'5rem'} columnGap={4} alignItems={'flex-start'}>
+        <Stack flexDirection={'row'} p={2} rowGap={10} justifyContent={'center'} flexWrap={'wrap'} mb={'5rem'} mt={'7rem'} columnGap={4} alignItems={'flex-start'}>
             {/* left box */}
             <Stack rowGap={4}>
                 {/* heading */}

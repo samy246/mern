@@ -24,7 +24,7 @@ export const About = () => {
       sx={{ bgcolor: "transparent", minHeight: "100vh", px: 2, mt: "2rem" }}
       disableGutters
     >
-      <Stack alignItems="center" spacing={4} px={0} mt={'5rem'}>
+      <Stack alignItems="center" spacing={4} px={0} mt={'7rem'}>
         {/* Page Heading */}
          {/* About Title with Background Banner */}
          <Box

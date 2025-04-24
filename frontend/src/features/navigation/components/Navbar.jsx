@@ -801,6 +801,7 @@ import { logoutAsync, selectLoggedInUser } from '../../auth/AuthSlice';
 import { selectWishlistItems } from '../../wishlist/WishlistSlice';
 import { selectProductIsFilterOpen, toggleFilters } from '../../products/ProductSlice';
 import logo from "../../../../src/assets/images/logo.png";
+// png";
 import "./Nav.css";
 
 export const Navbar = ({ isProductList = false }) => {
@@ -889,7 +890,7 @@ export const Navbar = ({ isProductList = false }) => {
   };
 
   return (
-    <AppBar position="absolute" sx={{
+    <AppBar className='testnav' position="absolute" sx={{
       backgroundColor: "transparent",
       boxShadow: "none",
       color: "text.primary"

@@ -143,7 +143,7 @@ export const HomePage = () => {
   return (
     <>
       <Navbar />
-      <Stack mb={'3rem'} mt={'5rem'}>
+      <Stack mb={'3rem'} mt={'7rem'}>
         <Stack sx={{width:"100%", height: is600 ? "auto" : is800 ? "300px" : is1200 ? "400px" : "500px"}}>
           <ProductBanner banners={banners}/>
         </Stack>
