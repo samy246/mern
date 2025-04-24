@@ -16,7 +16,7 @@ function Products() {
     <>
       <Navbar isProductList={true}/>
 
-      <Stack mt="5rem" sx={{ position: "relative", display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <Stack mt="7rem" sx={{ position: "relative", display: "flex", justifyContent: "center", alignItems: "center" }}>
   {/* Text Behind Image */}
   {/* <Typography
     variant="h2"
