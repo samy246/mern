@@ -9,9 +9,12 @@ import { useForm } from "react-hook-form"
 import { toast } from 'react-toastify'
 import { Navbar } from '../navigation/components/Navbar'
 import { updatedailyProductById } from '../products/ProductApi'
-
+import { useMeta } from '../../hooks/useMeta'
 export const DailyProductUpdate = () => {
-
+  useMeta({
+            title: "Admin Daily-Product Update | Thekkady Spices",
+            description: "Thekkady Spices"
+          });
     const {register,handleSubmit,watch,formState: { errors }} = useForm()
     const [selectedQuantity, setSelectedQuantity] = useState(""); // To track selected quantity
     const [quantityPrice, setQuantityPrice] = useState("");
