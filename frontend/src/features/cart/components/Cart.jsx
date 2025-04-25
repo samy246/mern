@@ -76,7 +76,7 @@ const totalWeight = items.reduce((acc, item) => {
     const weightValue = parseFloat(item.weight) || 0;
     console.log("Parsed weight value:", weightValue);
 
-    const weightUnit = item.weight.replace(/[0-9.\s]/g, '').toLowerCase();
+    const weightUnit = item?.weight?.replace(/[0-9.\s]/g, '').toLowerCase();
     console.log("Weight unit:", weightUnit);
 
     let weightInKg = weightValue;
