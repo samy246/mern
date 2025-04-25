@@ -117,7 +117,7 @@ export const AddProduct = () => {
 
     return (
         <Stack p={'0 16px'} justifyContent={'center'} alignItems={'center'} flexDirection={'row'}>
-            <Stack width={is1100 ? "100%" : "60rem"} rowGap={4} mt={is480 ? 4 : 6} mb={6} component={'form'} noValidate onSubmit={handleSubmit(handleAddProduct)}>
+            <Stack width={is1100 ? "100%" : "60rem"} rowGap={4} mt={is480 ? 4 : 9} mb={6} component={'form'} noValidate onSubmit={handleSubmit(handleAddProduct)}>
                 {/* Field area */}
                 <Stack rowGap={3}>
                     <Stack>
