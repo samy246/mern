@@ -186,7 +186,7 @@ export const AdminDashBoard = () => {
                 </Stack>
             </motion.div>
 
-            <Stack rowGap={5} mt={is600 ? 2 : 5} mb={'3rem'} mr={'2rem'} ml={'2rem'}>
+            <Stack rowGap={5} mt={is600 ? 2 : 7} mb={'3rem'} mr={'2rem'} ml={'2rem'}>
 
                 {/* sort options */}
                 <Stack flexDirection={'row'} justifyContent={'space-between'} alignItems={'center'} columnGap={2} mt={'2rem'}>
