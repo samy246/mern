@@ -149,7 +149,7 @@ console.log("selecteddailyProduct",selecteddailyProduct);
 
         {
             selecteddailyProduct &&
-        <Stack width={is1100?"100%":"60rem"} rowGap={4} mt={is480?4:6} mb={6} component={'form'} noValidate onSubmit={handleSubmit(handledailyProductUpdate)}>
+        <Stack width={is1100?"100%":"60rem"} rowGap={4} mt={is480?4:8} mb={6} component={'form'} noValidate onSubmit={handleSubmit(handledailyProductUpdate)}>
  <Button size={is480?'medium':'medium'} variant='outlined' component={Link} to={'/admin/dashboard'} style={{width:"100px"}}>Back</Button>
             {/* feild area */}
             <h1>{selecteddailyProduct?.title}-Updation</h1>
