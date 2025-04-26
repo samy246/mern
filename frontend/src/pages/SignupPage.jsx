@@ -1,6 +1,8 @@
 import React from 'react'
 import { Signup } from '../features/auth/components/Signup'
 import { Navbar } from '../features/navigation/components/Navbar'
+import { Stack } from '@mui/material'
+
 import "./login.css"
 export const SignupPage = () => {
   return (
