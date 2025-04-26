@@ -5,7 +5,10 @@ import "./login.css"
 export const SignupPage = () => {
   return (
     <>
-    <Navbar style={{backgroundColor:"white !important"}}/>
+     <Stack className="testpgeeeeeeeeeeeee">
+           <Navbar  />
+           </Stack>
+    {/* <Navbar style={{backgroundColor:"white !important"}}/> */}
     <Signup/>
     </>
   )
