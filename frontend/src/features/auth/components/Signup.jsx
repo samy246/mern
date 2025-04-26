@@ -66,11 +66,12 @@ export const Signup = () => {
 
   return (
     <Stack
-    width="100vw"
+    width="100%"
     height="100vh"
     flexDirection="row"
     sx={{
       overflowY: "hidden",
+      marginTop:"7rem",
       backgroundImage: `url(${bgimage})`,
       backgroundSize: "cover",
       backgroundPosition: "center",
