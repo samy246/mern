@@ -66,6 +66,7 @@ export const Login = () => {
     height="100vh"
     flexDirection="row"
     sx={{
+      marginTop:"7rem",
       overflowY: "hidden",
       backgroundImage: `url(${bgimage})`,
       backgroundSize: "cover",
