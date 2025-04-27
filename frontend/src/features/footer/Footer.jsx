@@ -233,18 +233,14 @@ const loggedInUser=useSelector(selectLoggedInUser)
             <Stack alignSelf={"center"} alignItems={"center"} rowGap={"1rem"} flexDirection={'row'} columnGap={'1rem'}>
     <Typography color="GrayText">
     @Developed by{' '}
-    <Link
-      href="https://letsgametech.com/"
-       component="a"
-      target="_blank"
-
-      rel="noopener noreferrer"
-      underline="hover"
-
-      sx={{ color: "white", textDecoration: "none", fontWeight: "bold" }}
-    >
-      LetsGameTech
-    </Link>
+    <a
+    href="https://letsgametech.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ color: "white", textDecoration: "none", fontWeight: "bold" }}
+  >
+    LetsGameTech
+  </a>
   </Typography>
     </Stack>
     </Stack>
