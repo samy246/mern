@@ -232,14 +232,15 @@ const loggedInUser=useSelector(selectLoggedInUser)
            {/* compny  */}
             <Stack alignSelf={"center"} alignItems={"center"} rowGap={"1rem"} flexDirection={'row'} columnGap={'1rem'}>
     <Typography color="GrayText">
-    Developed by{' '}
+    @Developed by{' '}
     <Link
       href="https://letsgametech.com/"
       target="_blank"
       rel="noopener noreferrer"
       underline="hover"
-      color="inherit"
+      color="white"
       fontWeight="bold"
+      style={{textDecoration:"none"}}
     >
       LetsGameTech
     </Link>
