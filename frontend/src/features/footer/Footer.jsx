@@ -235,12 +235,13 @@ const loggedInUser=useSelector(selectLoggedInUser)
     @Developed by{' '}
     <Link
       href="https://letsgametech.com/"
+       component="a"
       target="_blank"
+
       rel="noopener noreferrer"
       underline="hover"
-      color="white"
-      fontWeight="bold"
-      style={{textDecoration:"none"}}
+
+      sx={{ color: "white", textDecoration: "none", fontWeight: "bold" }}
     >
       LetsGameTech
     </Link>
