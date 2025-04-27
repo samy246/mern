@@ -231,6 +231,21 @@ const loggedInUser=useSelector(selectLoggedInUser)
             </Stack>
 
     </Stack>
+    <Stack>
+    <Typography color="GrayText">
+    Developed by{' '}
+    <Link
+      href="https://letsgametech.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+      underline="hover"
+      color="inherit"
+      fontWeight="bold"
+    >
+      LetsGameTech
+    </Link>
+  </Typography>
+    </Stack>
         {/* Parcel Services Modal */}
         <Dialog
                 open={isParcelModalOpen}
