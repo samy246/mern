@@ -229,9 +229,8 @@ const loggedInUser=useSelector(selectLoggedInUser)
    </Link>
                 </Stack>
             </Stack>
-
-    </Stack>
-    <Stack>
+           {/* compny  */}
+            <Stack alignSelf={"center"} alignItems={"center"} rowGap={"1rem"} flexDirection={'row'} columnGap={'1rem'}>
     <Typography color="GrayText">
     Developed by{' '}
     <Link
@@ -246,6 +245,8 @@ const loggedInUser=useSelector(selectLoggedInUser)
     </Link>
   </Typography>
     </Stack>
+    </Stack>
+
         {/* Parcel Services Modal */}
         <Dialog
                 open={isParcelModalOpen}
