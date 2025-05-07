@@ -149,18 +149,23 @@ export const UserOrders = () => {
                                                                 <Typography variant='body1'  fontSize={'.9rem'}  color={'text.secondary'}>{product.product.brand.name}</Typography>
                                                                 <Typography color={'text.secondary'} fontSize={'.9rem'}>Qty: {product.quantity}</Typography>
                                                             </Stack>
-                                                            <Typography>Rs.{product.product.price}</Typography>
+                                                            <Typography>Rs.
+                                                            {
+    product?.product?.quantity?.find(q => q?.weight == product?.weight)?.price ?? 'N/A'
+  }
+                                                                {/* {product.product.price} */}
+                                                                </Typography>
                                                         </Stack>
 
                                                         <Typography color={'text.secondary'}>{product.product.description}</Typography>
 
                                                         <Stack mt={2} alignSelf={is480?"flex-start":'flex-end'} flexDirection={'row'} columnGap={2} >
                                                             <Button size='small' component={Link} to={`/product-details/${product.product._id}`} variant='outlined'>View Product</Button>
-                                                            {
+                                                            {/* {
                                                                 cartItems.some((cartItem)=>cartItem.product._id===product.product._id)?
                                                                 <Button  size='small' variant='contained' component={Link} to={"/cart"}>Already in Cart</Button>
                                                                 :<Button  size='small' variant='contained' onClick={()=>handleAddToCart(product.product)}>Buy Again</Button>
-                                                            }
+                                                            } */}
                                                         </Stack>
 
                                                     </Stack>

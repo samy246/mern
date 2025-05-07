@@ -293,7 +293,12 @@ export const AdminOrders = () => {
                               <Typography variant="body2" color="text.secondary">Brand: {item.product.brand.name}</Typography>
                             </Grid>
                             <Grid item xs={4} sm={2}>
-                              <Typography variant="body2"><b>Price:</b> Rs.{item.product.price}</Typography>
+                              <Typography variant="body2"><b>Price:</b> Rs.
+                              {
+    item?.product?.quantity?.find(q => q?.weight == item?.weight)?.price ?? 'N/A'
+  }
+                              {/* {item.product.price} */}
+                              </Typography>
                             </Grid>
                             <Grid item xs={4} sm={2}>
                               <Typography variant="body2"><b>Quantity:</b> {item.quantity}</Typography>
@@ -302,7 +307,14 @@ export const AdminOrders = () => {
                               <Typography variant="body2"><b>Weight:</b> {item.weight}</Typography>
                             </Grid>
                             <Grid item xs={4} sm={2}>
-                              <Typography variant="body2"><b>Total:</b> Rs.{(item.product.price * item.quantity).toFixed(2)}</Typography>
+                              <Typography variant="body2"><b>Total:</b> Rs.
+                              {
+    (
+      (item?.product?.quantity?.find(q => q?.weight == item?.weight)?.price ?? 0) * item?.quantity
+    ).toFixed(2)
+  }
+                              {/* {(item.product.price * item.quantity).toFixed(2)} */}
+                              </Typography>
                             </Grid>
                           </Grid>
                         </Grid>
