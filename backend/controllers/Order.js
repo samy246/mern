@@ -134,11 +134,110 @@ exports.getAll = async (req, res) => {
     }
 };
 
+// exports.updateById=async(req,res)=>{
+//     try {
+//         const {id}=req.params
+//         const updated=await Order.findByIdAndUpdate(id,req.body,{new:true})
+//         console.log("order data updated",updated);
+//         res.status(200).json(updated)
+//         console.log("order data updated",updated);
+
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).json({message:'Error updating order, please try again later'})
+//     }
+// }
 exports.updateById=async(req,res)=>{
+    console.log("updated order");
+
     try {
         const {id}=req.params
         const updated=await Order.findByIdAndUpdate(id,req.body,{new:true})
+
+        // Get the updated order with populated user data
+        const populatedOrder = await Order.findById(id).populate("user").exec();
+
+        if (!populatedOrder) {
+            return res.status(404).json({ message: "Order not found after update" });
+        }
+
+        // Format the updated order data for email
+        const formattedOrder = {
+            user: {
+                id: populatedOrder.user?._id,
+                name: populatedOrder.user?.name,
+                email: populatedOrder.user?.email,
+            },
+            orderId: populatedOrder._id,
+            address: populatedOrder.address,
+            paymentMode: populatedOrder.paymentMode,
+            shipping: populatedOrder.shipping,
+            total: Number(populatedOrder.total),
+            status: populatedOrder.status || "Processing", // Include status in the email
+            items: populatedOrder.item?.map(item => ({
+                quantity: item?.quantity,
+                weight: item?.weight,
+                productTitle: item.product?.title || "Unknown Product"
+            }))
+        };
+
+        // Format order details for email
+        const orderDetails = formattedOrder.items.map(item => `
+            <li>
+                <strong>Product:</strong> ${item.productTitle}<br>
+                <strong>Quantity:</strong> ${item.quantity}<br>
+                <strong>Weight:</strong> ${item.weight}
+            </li>
+        `).join("");
+
+        const emailContent = `
+            <p>Dear ${formattedOrder?.user?.name}</p>
+
+            <p>Your order has been updated. Below are the latest details:</p>
+
+            <h3>User Details:</h3>
+            <ul>
+                <li><strong>Name:</strong> ${formattedOrder?.user?.name}</li>
+                <li><strong>Email:</strong> ${formattedOrder?.user?.email}</li>
+            </ul>
+
+            <h3>Payment & Order Details:</h3>
+            <ul>
+                <li><strong>User ID:</strong> ${formattedOrder?.user?.id}</li>
+                <li><strong>Order ID:</strong> ${formattedOrder?.orderId}</li>
+                <li><strong>Payment Mode:</strong> ${formattedOrder?.paymentMode}</li>
+                <li><strong>Shipping:Rs:</strong> ${formattedOrder?.shipping}</li>
+                <li><strong>Total:</strong> ₹${formattedOrder?.total?.toFixed(2)}</li>
+                <li><strong>Order Status:</strong> ${formattedOrder?.status}</li>
+            </ul>
+
+            <h3>Address Details:</h3>
+            <ul>
+                <li><strong>Street:</strong> ${formattedOrder.address[0]?.street}</li>
+                <li><strong>City:</strong> ${formattedOrder.address[0]?.city}</li>
+                <li><strong>State:</strong> ${formattedOrder.address[0]?.state}</li>
+                <li><strong>Phone:</strong> ${formattedOrder.address[0]?.phoneNumber}</li>
+                <li><strong>Postal Code:</strong> ${formattedOrder.address[0]?.postalCode}</li>
+                <li><strong>Country:</strong> ${formattedOrder.address[0]?.country}</li>
+            </ul>
+
+            <h3>Order Items:</h3>
+            <ul>
+                ${orderDetails}
+            </ul>
+
+            <p>If you have any questions about these updates, please contact us.</p>
+            <p><b>For any inquiries, please call our customer care number: +91-8248 22 2532 Collect your Invoice Bill</b></p>
+            <p>Thank you for choosing Thekkady Spices!</p>
+            <p>Regards,<br>Thekkady Spices Team</p>
+        `;
+
+        // Send email with updated order details
+        await sendMail(populatedOrder.user?.email, "Order Update Notification", emailContent);
+
+        console.log("Order data updated and email sent", updated);
         res.status(200).json(updated)
+
     } catch (error) {
         console.log(error);
         res.status(500).json({message:'Error updating order, please try again later'})
