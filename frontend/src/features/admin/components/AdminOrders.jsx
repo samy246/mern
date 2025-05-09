@@ -831,7 +831,7 @@ export const AdminOrders = () => {
 <img src={logo} width={"150px"} height={"110px"}/>
                 <h1 style={{ color: '#006600', margin: '0 0 5px 0' }}>Thekkady Spices</h1>
                 <p style={{ fontSize: '14px', margin: '0 0 5px 0' }}>GSTIN: 33AFRPR5719M1ZP</p>
-                <p style={{ fontSize: '14px', margin: '0 0 5px 0' }}>Contact Number: +91 8248 22 2532</p>
+                <p style={{ fontSize: '14px', margin: '0 0 5px 0' }}>Contact Number: +91 9080 53 5414</p>
                 <h2 style={{ margin: '10px 0' }}>Tax Invoice</h2>
                 <div style={{ border: '1px solid #006600', margin: '10px 0' }}></div>
               </div>
