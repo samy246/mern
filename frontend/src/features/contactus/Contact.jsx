@@ -132,7 +132,7 @@ export const Contact = () => {
           <p>Monday to Saturday 9:30 AM – 8:30 PM</p>
           <p>Sunday 9:30 AM – 1:00 PM</p>
           <h3>PHONE</h3>
-          <p>+91 8248 22 2532</p>
+          <p>+91 9080 53 5414</p>
 
           <h3>EMAIL</h3>
           <p>

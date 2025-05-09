@@ -84,7 +84,7 @@ const emailContent = `
             </ul>
 
             <p>Please review and process the order accordingly.</p>
-            <p>Kindly verify the order to call customer care number: +91-8248 22 2532</p>
+            <p>Kindly verify the order to call customer care number: +91-9080 53 5414</p>
             <p>Thank you,<br>Thekkady Spices Team</p>
         `;
 
@@ -227,7 +227,7 @@ exports.updateById=async(req,res)=>{
             </ul>
 
             <p>If you have any questions about these updates, please contact us.</p>
-            <p><b>For any inquiries, please call our customer care number: +91-8248 22 2532 Collect your Invoice Bill</b></p>
+            <p><b>For any inquiries, please call our customer care number: +91-9080 53 5414 Collect your Invoice Bill</b></p>
             <p>Thank you for choosing Thekkady Spices!</p>
             <p>Regards,<br>Thekkady Spices Team</p>
         `;
