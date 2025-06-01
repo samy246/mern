@@ -107,32 +107,32 @@ exports.getByUserId=async(req,res)=>{
     }
 }
 
-exports.getAll = async (req, res) => {
-    try {
-        let skip=0
-        let limit=0
+// exports.getAll = async (req, res) => {
+//     try {
+//         let skip=0
+//         let limit=0
 
-        if(req.query.page && req.query.limit){
-            const pageSize=req.query.limit
-            const page=req.query.page
-            skip=pageSize*(page-1)
-            limit=pageSize
-        }
+//         if(req.query.page && req.query.limit){
+//             const pageSize=req.query.limit
+//             const page=req.query.page
+//             skip=pageSize*(page-1)
+//             limit=pageSize
+//         }
 
-        const totalDocs=await Order.find({}).countDocuments().exec()
-        const results=await Order.find({}).skip(skip).limit(limit)
-    //     .populate("user")
-    // .lean();
-        .populate("user").exec()
+//         const totalDocs=await Order.find({}).countDocuments().exec()
+//         const results=await Order.find({}).skip(skip).limit(limit)
+//     //     .populate("user")
+//     // .lean();
+//         .populate("user").exec()
 
-        res.header("X-Total-Count",totalDocs)
-        res.status(200).json(results)
+//         res.header("X-Total-Count",totalDocs)
+//         res.status(200).json(results)
 
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({message:'Error fetching orders, please try again later'})
-    }
-};
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).json({message:'Error fetching orders, please try again later'})
+//     }
+// };
 
 // exports.updateById=async(req,res)=>{
 //     try {
@@ -147,6 +147,61 @@ exports.getAll = async (req, res) => {
 //         res.status(500).json({message:'Error updating order, please try again later'})
 //     }
 // }
+// may23
+exports.getAll = async (req, res) => {
+    try {
+        // Set default pagination values
+        const page = parseInt(req.query.page) || 1
+        const limit = parseInt(req.query.limit) || 10
+        const maxLimit = 100 // Prevent very large requests
+
+        // Enforce reasonable limits
+        const pageSize = Math.min(limit, maxLimit)
+        const skip = pageSize * (page - 1)
+
+        // Add timeout for the query (optional)
+        const queryTimeout = 30000 // 30 seconds
+
+        // Use Promise.all to run count and find queries in parallel
+        const [totalDocs, results] = await Promise.all([
+            Order.countDocuments({}).maxTimeMS(queryTimeout),
+            Order.find({})
+                .skip(skip)
+                .limit(pageSize)
+                .populate("user"
+                //     {
+                //     path: "user",
+                //     select: "name email" // Only select needed fields to reduce payload
+                // }
+            )
+                .lean() // Use lean() for better performance if you don't need mongoose document methods
+                .maxTimeMS(queryTimeout)
+                .exec()
+        ])
+
+        // Add pagination metadata to response headers
+        res.header("X-Total-Count", totalDocs)
+        res.header("X-Page", page)
+        res.header("X-Limit", pageSize)
+        res.header("X-Total-Pages", Math.ceil(totalDocs / pageSize))
+
+        res.status(200).json(results)
+
+    } catch (error) {
+        console.error('Error fetching orders:', error)
+
+        // Handle specific timeout errors
+        if (error.name === 'MongooseError' && error.message.includes('timeout')) {
+            return res.status(408).json({
+                message: 'Request timeout - please try with smaller page size or try again later'
+            })
+        }
+
+        res.status(500).json({
+            message: 'Error fetching orders, please try again later'
+        })
+    }
+}
 exports.updateById=async(req,res)=>{
     console.log("updated order");
 
