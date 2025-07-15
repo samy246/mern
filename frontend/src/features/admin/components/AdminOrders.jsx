@@ -2228,11 +2228,11 @@ export const AdminOrders = () => {
 
                     return (
                       <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#f9f9f9' : 'white' }}>
-                        <td style={{ padding: '10px', textAlign: 'left', border: '1px solid #ddd' }}>{item.product.title}</td>
-                        <td style={{ padding: '10px', textAlign: 'left', border: '1px solid #ddd' }}>{item.product.brand.name}</td>
-                        <td style={{ padding: '10px', textAlign: 'left', border: '1px solid #ddd' }}>{item.weight}</td>
+                        <td style={{ padding: '10px', textAlign: 'left', border: '1px solid #ddd' }}>{item?.product?.title}</td>
+                        <td style={{ padding: '10px', textAlign: 'left', border: '1px solid #ddd' }}>{item?.product?.brand?.name}</td>
+                        <td style={{ padding: '10px', textAlign: 'left', border: '1px solid #ddd' }}>{item?.weight}</td>
                         <td style={{ padding: '10px', textAlign: 'right', border: '1px solid #ddd' }}>₹{price}</td>
-                        <td style={{ padding: '10px', textAlign: 'center', border: '1px solid #ddd' }}>{item.quantity}</td>
+                        <td style={{ padding: '10px', textAlign: 'center', border: '1px solid #ddd' }}>{item?.quantity}</td>
                         <td style={{ padding: '10px', textAlign: 'right', border: '1px solid #ddd' }}>₹{itemTotal}</td>
                       </tr>
                     );
