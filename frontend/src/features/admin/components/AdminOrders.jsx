@@ -2097,7 +2097,7 @@ export const AdminOrders = () => {
                           <Grid container spacing={1}>
                             <Grid item xs={12} sm={6}>
                               <Typography variant="subtitle1">{item.product.title}</Typography>
-                              <Typography variant="body2" color="text.secondary">Brand: {item.product.brand.name}</Typography>
+                              <Typography variant="body2" color="text.secondary">Brand: {item?.product?.brand?.name}</Typography>
                             </Grid>
                             <Grid item xs={4} sm={2}>
                               <Typography variant="body2"><b>Price:</b> Rs.
@@ -2105,7 +2105,7 @@ export const AdminOrders = () => {
                               </Typography>
                             </Grid>
                             <Grid item xs={4} sm={2}>
-                              <Typography variant="body2"><b>Quantity:</b> {item.quantity}</Typography>
+                              <Typography variant="body2"><b>Quantity:</b> {item?.quantity}</Typography>
                             </Grid>
                             <Grid item xs={4} sm={2}>
                               <Typography variant="body2"><b>Weight:</b> {item.weight}</Typography>
