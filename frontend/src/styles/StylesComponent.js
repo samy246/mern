@@ -925,10 +925,7 @@ text-align:center;
     }
   }
       @media screen and (max-width: 376px) {
-        .h-list {
-          height: 55vh;
-          top: 6.6rem;
-        }
+
 
         .h-list li a {
           font-size: 1.2rem;
