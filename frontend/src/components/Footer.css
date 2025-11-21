@@ -1,0 +1,386 @@
+/* Parcel Modal Overlay */
+.parcel-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal Content Container */
+.parcel-modal-content {
+  background: white;
+  border-radius: 16px;
+  max-width: 740px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 40px;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Close Button */
+.parcel-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: #333;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  line-height: 1;
+}
+
+.parcel-modal-close:hover {
+  background-color: #f0f0f0;
+  color: #000;
+  transform: rotate(90deg);
+}
+
+/* Modal Title */
+.parcel-modal-title {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 0 35px 0;
+  color: #000;
+  letter-spacing: -0.5px;
+}
+
+/* Service List Container */
+.parcel-service-list {
+  margin-bottom: 25px;
+}
+
+/* Parcel Service Items */
+.parcel-service-item {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 25px;
+  margin-bottom: 18px;
+  background-color: #ffffff;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.parcel-service-item:last-child {
+  margin-bottom: 0;
+}
+
+.parcel-service-item:hover {
+  border-color: #333;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+  transform: translateX(5px);
+}
+
+.parcel-service-item i {
+  font-size: 28px;
+  color: #000;
+  min-width: 28px;
+}
+
+.parcel-service-item span {
+  font-size: 19px;
+  font-weight: 500;
+  color: #000;
+}
+
+/* Important Notice */
+.parcel-important-notice {
+  background-color: #ffe5e5;
+  color: #d00000;
+  padding: 16px 22px;
+  border-radius: 10px;
+  text-align: center;
+  margin: 25px 0;
+  font-weight: 600;
+  font-size: 16px;
+  border: 1px solid #ffcccc;
+  line-height: 1.5;
+}
+
+/* Courier Section */
+.parcel-courier-section {
+  background-color: #f5f5f5;
+  padding: 28px;
+  border-radius: 10px;
+  margin-top: 25px;
+}
+
+.parcel-courier-title {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 0 22px 0;
+  color: #000;
+}
+
+/* Price Rows */
+.parcel-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 22px;
+  background-color: white;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  border: 1px solid #e0e0e0;
+}
+
+.parcel-price-row:last-child {
+  margin-bottom: 0;
+}
+
+.parcel-price-row span:first-child {
+  font-size: 17px;
+  color: #333;
+  font-weight: 400;
+}
+
+.parcel-price-green {
+  font-size: 19px;
+  font-weight: bold;
+  color: #00a000;
+}
+
+/* Scrollbar Styling */
+.parcel-modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.parcel-modal-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.parcel-modal-content::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.parcel-modal-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Tablet Responsive (768px and below) */
+@media (max-width: 768px) {
+  .parcel-modal-content {
+    padding: 30px 25px;
+    margin: 15px;
+  }
+
+  .parcel-modal-title {
+    font-size: 28px;
+    margin-bottom: 25px;
+  }
+
+  .parcel-service-item {
+    padding: 15px 20px;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+
+  .parcel-service-item i {
+    font-size: 24px;
+  }
+
+  .parcel-service-item span {
+    font-size: 17px;
+  }
+
+  .parcel-important-notice {
+    padding: 14px 18px;
+    font-size: 14px;
+    margin: 20px 0;
+  }
+
+  .parcel-courier-section {
+    padding: 24px 20px;
+  }
+
+  .parcel-courier-title {
+    font-size: 20px;
+    margin-bottom: 18px;
+  }
+
+  .parcel-price-row {
+    padding: 14px 18px;
+    margin-bottom: 12px;
+  }
+
+  .parcel-price-row span:first-child {
+    font-size: 15px;
+  }
+
+  .parcel-price-green {
+    font-size: 17px;
+  }
+}
+
+/* Mobile Responsive (480px and below) */
+@media (max-width: 480px) {
+  .parcel-modal-overlay {
+    padding: 10px;
+  }
+
+  .parcel-modal-content {
+    padding: 25px 18px;
+    border-radius: 12px;
+  }
+
+  .parcel-modal-close {
+    top: 15px;
+    right: 15px;
+    font-size: 26px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .parcel-modal-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .parcel-service-item {
+    padding: 13px 16px;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .parcel-service-item i {
+    font-size: 22px;
+    min-width: 22px;
+  }
+
+  .parcel-service-item span {
+    font-size: 15px;
+  }
+
+  .parcel-important-notice {
+    font-size: 13px;
+    padding: 12px 15px;
+    margin: 18px 0;
+  }
+
+  .parcel-courier-section {
+    padding: 20px 16px;
+    margin-top: 18px;
+  }
+
+  .parcel-courier-title {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .parcel-price-row {
+    padding: 12px 15px;
+    margin-bottom: 10px;
+  }
+
+  .parcel-price-row span:first-child {
+    font-size: 14px;
+  }
+
+  .parcel-price-green {
+    font-size: 16px;
+  }
+}
+
+/* Extra Small Mobile (360px and below) */
+@media (max-width: 360px) {
+  .parcel-modal-content {
+    padding: 20px 15px;
+  }
+
+  .parcel-modal-title {
+    font-size: 20px;
+  }
+
+  .parcel-service-item span {
+    font-size: 14px;
+  }
+
+  .parcel-important-notice {
+    font-size: 12px;
+  }
+
+  .parcel-courier-title {
+    font-size: 16px;
+  }
+}
+/* icons style */
+
+.footer-item.social ul {
+  display: flex;
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  color: white;
+  font-size: 24px;
+  transition: transform 0.3s ease;
+  text-decoration: none;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+  background-color: transparent;
+  color: transparent;
+}
+.social-icon.whatsapp {
+  background-color: #25D366;
+}
+.social-icon.facebook {
+  background-color: #1877f2;
+}
+
+.social-icon.instagram {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}

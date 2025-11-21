@@ -1,0 +1,111 @@
+/* -------------------------------- */
+@media screen and (max-width: 1024px) {
+
+    /* HOME SECTION */
+    .mySwiperHome .caption {
+        width: 80%;
+        font-size: 26px;
+    }
+}
+
+
+
+/* -------------------------------- */
+@media screen and (max-width: 769px) {
+    /* .mySwiperHome .swiper-slide img{
+         width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    animation: kenburns 12s ease-in-out infinite !important;
+    } */
+    /* .mySwiperHome .overlay{
+          height: auto !important;
+    object-fit: contain !important;
+    } */
+     #home{
+        height: 40vh !important;
+     }
+     .mySwiperHome{
+         height: auto !important;
+    object-fit: contain !important;
+     }
+    /* HOME SECTION */
+     .mySwiperHome .caption{
+        font-size: 24px;
+    }
+
+
+    .mySwiperServices .swiper-slide {
+        width: 185px !important;
+        height: 220px;
+    }
+}
+
+
+
+/* -------------------------------- */
+@media screen and (max-width: 575px) {
+
+    /* HOME SECTION */
+    .mySwiperHome .caption {
+        width: 90%;
+        font-size: 12px;
+    }
+
+
+    .mySwiperServices .card-icon a {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+
+    /* TESTIMONIAL SECTION */
+    .mySwiperTestinomal .testimonial-card {
+        text-align: center;
+    }
+
+    .mySwiperTestinomal .testimonial-content {
+        padding: 0 15px;
+    }
+
+}
+
+/* -------------------------------- */
+@media screen and (max-width: 475px) {
+
+
+    .mySwiperHome .caption {
+        width: 100%;
+        font-size: 12px;
+        padding: 5px;
+    }
+
+
+    .mySwiperServices .swiper-slide {
+        width: 192px;
+        flex-shrink: 0;
+    }
+}
+
+/* -------------------------------- */
+@media screen and (max-width: 426px) {
+
+    /* HOME SECTION */
+    .mySwiperHome .caption {
+        font-size: 12px !important;
+        padding: 5px !important;
+    }
+
+}
+
+
+/* -------------------------------- */
+@media screen and (max-width: 321px) {
+
+    /* HOME SECTION */
+    .mySwiperHome .caption {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+}
