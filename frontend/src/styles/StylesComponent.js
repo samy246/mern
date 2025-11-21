@@ -1007,10 +1007,9 @@ text-align:center;
           width: 32px;
         }
             #scroll-on-top1 {
-          bottom: 5rem;
+
           right: 5%;
-          height: 32px;
-          width: 32px;
+
         }
 
         .contact-box h2 {
