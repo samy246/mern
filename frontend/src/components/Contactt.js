@@ -135,6 +135,8 @@ import { axiosi } from "../config/axios";
           <p>Sunday 9:30 AM – 1:00 PM</p>
           <h3>PHONE</h3>
           <p>+91 9080 53 5414</p>
+<p>+91 7200 88 0021</p>
+<p>+91 8248 22 2532</p>
 
           <h3>EMAIL</h3>
           <p>
